@@ -1,0 +1,17 @@
+{
+  "name": "@ydnl/server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Express API for the YDNL prototype. Endpoints map directly to YDNL schema operations.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "ydnl-core": "*"
+  }
+}

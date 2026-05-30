@@ -1,0 +1,18 @@
+{
+  "name": "ydnl",
+  "version": "1.0.0",
+  "private": true,
+  "description": "YorubaDrum Notation Language: an open, machine readable encoding framework for Yoruba Dundun and Bata polyrhythmic drum music.",
+  "license": "CC-BY-4.0",
+  "workspaces": [
+    "core",
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "test": "npm test -w ydnl-core",
+    "server": "npm run dev -w @ydnl/server",
+    "web": "npm run dev -w @ydnl/web",
+    "dev": "echo \"Run 'npm run server' and 'npm run web' in two terminals.\""
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ydnl.org/schema/v1/ydnl.schema.json",
+  "title": "YorubaDrum Notation Language (YDNL) Pattern",
+  "description": "JSON serialisation of a single YDNL drum pattern. CulturalAnnotation is mandatory.",
+  "type": "object",
+  "required": ["pattern_id", "title", "tempo_bpm", "cultural_annotation", "rhythmic_layers"],
+  "additionalProperties": false,
+  "properties": {
+    "pattern_id": { "type": "string" },
+    "title": { "type": "string" },
+    "tempo_bpm": { "type": "number", "exclusiveMinimum": 0 },
+    "metric_ratio": { "type": "string" },
+    "ensemble_ref": { "type": "string" },
+    "cultural_annotation": { "$ref": "#/definitions/culturalAnnotation" },
+    "rhythmic_layers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/rhythmicLayer" }
+    }
+  },
+  "definitions": {
+    "culturalAnnotation": {
+      "type": "object",
+      "required": ["orisha_id", "ceremony_type", "validation_status"],
+      "properties": {
+        "orisha_id": { "type": "string", "enum": ["Sango", "Ogun", "Yemoja", "Obatala", "Oya", "Egungun", "Osun", "Orunmila", "Eshu"] },
+        "ceremony_type": { "type": "string", "enum": ["naming", "funeral", "initiation", "festival", "palace", "secular"] },
+        "regional_variant": { "type": "string", "enum": ["Oyo", "Ondo", "Ekiti", "Ijebu", "diaspora"] },
+        "source_drummer_id": { "type": "string" },
+        "validation_status": { "type": "string", "enum": ["draft", "faculty-reviewed", "master-validated"] },
+        "recording_uri": { "type": "string" }
+      }
+    },
+    "rhythmicLayer": {
+      "type": "object",
+      "required": ["instrument_role", "pulse_unit", "metric_cycle_length", "stroke_events"],
+      "properties": {
+        "layer_id": { "type": "string" },
+        "instrument_role": { "type": "string" },
+        "pulse_unit": { "type": "string", "enum": ["crotchet", "quaver", "semiquaver", "demisemiquaver"] },
+        "metric_cycle_length": { "type": "integer", "minimum": 1 },
+        "offset_pulses": { "type": "integer", "minimum": 0 },
+        "stroke_events": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/strokeEvent" }
+        }
+      }
+    },
+    "strokeEvent": {
+      "type": "object",
+      "required": ["pulse_position", "stroke_type", "pitch_register"],
+      "properties": {
+        "event_id": { "type": "string" },
+        "pulse_position": { "type": "integer", "minimum": 1 },
+        "stroke_type": { "type": "string", "enum": ["open", "muted", "slap", "heel-toe", "rim", "combined"] },
+        "pitch_register": { "type": "string", "enum": ["low", "mid", "high", "glide"] },
+        "duration_pulses": { "type": "integer", "minimum": 1 },
+        "dynamics": { "type": "string" },
+        "pitch_glide": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "required": ["start_register", "end_register", "glide_direction"],
+              "properties": {
+                "start_register": { "type": "string", "enum": ["low", "mid", "high"] },
+                "end_register": { "type": "string", "enum": ["low", "mid", "high"] },
+                "glide_direction": { "type": "string", "enum": ["ascending", "descending", "level"] },
+                "duration_pulses": { "type": "integer", "minimum": 1 }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

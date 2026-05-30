@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ydnl="https://ydnl.org/schema/v1"
+           targetNamespace="https://ydnl.org/schema/v1"
+           elementFormDefault="qualified">
+
+  <!-- YorubaDrum Notation Language (YDNL) version 1.0 -->
+  <!-- Released under CC BY 4.0. -->
+
+  <xs:simpleType name="strokeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="open"/>
+      <xs:enumeration value="muted"/>
+      <xs:enumeration value="slap"/>
+      <xs:enumeration value="heel-toe"/>
+      <xs:enumeration value="rim"/>
+      <xs:enumeration value="combined"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="pitchRegister">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="low"/>
+      <xs:enumeration value="mid"/>
+      <xs:enumeration value="high"/>
+      <xs:enumeration value="glide"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="glideDirection">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ascending"/>
+      <xs:enumeration value="descending"/>
+      <xs:enumeration value="level"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="pitchGlide">
+    <xs:complexType>
+      <xs:attribute name="start" type="ydnl:pitchRegister" use="required"/>
+      <xs:attribute name="end" type="ydnl:pitchRegister" use="required"/>
+      <xs:attribute name="direction" type="ydnl:glideDirection" use="required"/>
+      <xs:attribute name="duration_pulses" type="xs:positiveInteger" default="1"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="strokeEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ydnl:pitchGlide" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="event_id" type="xs:string"/>
+      <xs:attribute name="pulse" type="xs:positiveInteger" use="required"/>
+      <xs:attribute name="stroke_type" type="ydnl:strokeType" use="required"/>
+      <xs:attribute name="pitch_register" type="ydnl:pitchRegister" use="required"/>
+      <xs:attribute name="duration_pulses" type="xs:positiveInteger" default="1"/>
+      <xs:attribute name="dynamics" type="xs:string" default="mf"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="layer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ydnl:strokeEvent" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="layer_id" type="xs:string"/>
+      <xs:attribute name="instrument_role" type="xs:string" use="required"/>
+      <xs:attribute name="metric_cycle_length" type="xs:positiveInteger" use="required"/>
+      <xs:attribute name="pulse_unit" type="xs:string" use="required"/>
+      <xs:attribute name="offset_pulses" type="xs:nonNegativeInteger" default="0"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="culturalAnnotation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="orisha" type="xs:string"/>
+        <xs:element name="ceremony_type" type="xs:string"/>
+        <xs:element name="regional_variant" type="xs:string" minOccurs="0"/>
+        <xs:element name="source_drummer" type="xs:string" minOccurs="0"/>
+        <xs:element name="validation_status" type="xs:string"/>
+        <xs:element name="recording_uri" type="xs:anyURI" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="drumPattern">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- culturalAnnotation is mandatory: minOccurs defaults to 1 -->
+        <xs:element ref="ydnl:culturalAnnotation"/>
+        <xs:element name="ensembleRef" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="id" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="rhythmicLayers">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="ydnl:layer" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="title" type="xs:string" use="required"/>
+      <xs:attribute name="tempo_bpm" type="xs:positiveInteger" use="required"/>
+      <xs:attribute name="metric_ratio" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ydnl">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ydnl:drumPattern" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

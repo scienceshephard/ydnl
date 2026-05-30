@@ -1,0 +1,214 @@
+[
+  {
+    "pattern_id": "DP-0012",
+    "title": "Bata Sango invocation",
+    "tempo_bpm": 132,
+    "metric_ratio": "12:8",
+    "ensemble_ref": "ENS-Bata-3",
+    "cultural_annotation": {
+      "orisha_id": "Sango",
+      "ceremony_type": "festival",
+      "regional_variant": "Oyo",
+      "source_drummer_id": "Alhaji Adewale Ayinla",
+      "validation_status": "master-validated",
+      "recording_uri": "corpus/DP-0012.wav"
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-0012-1",
+        "instrument_role": "iya-ilu",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 12,
+        "offset_pulses": 0,
+        "stroke_events": [
+          { "event_id": "EV-1", "pulse_position": 1, "stroke_type": "open", "pitch_register": "high", "duration_pulses": 1, "dynamics": "f", "pitch_glide": null },
+          { "event_id": "EV-2", "pulse_position": 3, "stroke_type": "muted", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
+          { "event_id": "EV-3", "pulse_position": 5, "stroke_type": "slap", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
+          { "event_id": "EV-4", "pulse_position": 9, "stroke_type": "open", "pitch_register": "glide", "duration_pulses": 2, "dynamics": "mf", "pitch_glide": { "start_register": "mid", "end_register": "high", "glide_direction": "ascending", "duration_pulses": 2 } }
+        ]
+      },
+      {
+        "layer_id": "LY-0012-2",
+        "instrument_role": "omele-abo",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 8,
+        "offset_pulses": 0,
+        "stroke_events": [
+          { "event_id": "EV-5", "pulse_position": 1, "stroke_type": "open", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
+          { "event_id": "EV-6", "pulse_position": 5, "stroke_type": "open", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0021",
+    "title": "Dundun Ogun praise line",
+    "tempo_bpm": 120,
+    "metric_ratio": "16:4",
+    "ensemble_ref": "ENS-Dundun-2",
+    "cultural_annotation": {
+      "orisha_id": "Ogun",
+      "ceremony_type": "palace",
+      "regional_variant": "Ondo",
+      "source_drummer_id": "Baba Tunde Ayanlola",
+      "validation_status": "faculty-reviewed",
+      "recording_uri": "corpus/DP-0021.wav"
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-0021-1",
+        "instrument_role": "iya-ilu-dundun",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 16,
+        "offset_pulses": 0,
+        "stroke_events": [
+          { "event_id": "EV-7", "pulse_position": 1, "stroke_type": "open", "pitch_register": "glide", "duration_pulses": 3, "dynamics": "f", "pitch_glide": { "start_register": "low", "end_register": "high", "glide_direction": "ascending", "duration_pulses": 3 } },
+          { "event_id": "EV-8", "pulse_position": 6, "stroke_type": "open", "pitch_register": "glide", "duration_pulses": 2, "dynamics": "mf", "pitch_glide": { "start_register": "high", "end_register": "mid", "glide_direction": "descending", "duration_pulses": 2 } },
+          { "event_id": "EV-9", "pulse_position": 11, "stroke_type": "muted", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null }
+        ]
+      },
+      {
+        "layer_id": "LY-0021-2",
+        "instrument_role": "gudugudu",
+        "pulse_unit": "quaver",
+        "metric_cycle_length": 4,
+        "offset_pulses": 0,
+        "stroke_events": [
+          { "event_id": "EV-10", "pulse_position": 1, "stroke_type": "open", "pitch_register": "high", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
+          { "event_id": "EV-11", "pulse_position": 3, "stroke_type": "muted", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0034",
+    "title": "Bata Egungun procession",
+    "tempo_bpm": 144,
+    "metric_ratio": "12:6:8",
+    "ensemble_ref": "ENS-Bata-4",
+    "cultural_annotation": {
+      "orisha_id": "Egungun",
+      "ceremony_type": "funeral",
+      "regional_variant": "Oyo",
+      "source_drummer_id": "Alhaji Rasheed Ayanwale",
+      "validation_status": "master-validated",
+      "recording_uri": "corpus/DP-0034.wav"
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-0034-1",
+        "instrument_role": "iya-ilu",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 12,
+        "offset_pulses": 0,
+        "stroke_events": [
+          { "event_id": "EV-12", "pulse_position": 1, "stroke_type": "slap", "pitch_register": "high", "duration_pulses": 1, "dynamics": "f", "pitch_glide": null },
+          { "event_id": "EV-13", "pulse_position": 4, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
+          { "event_id": "EV-14", "pulse_position": 7, "stroke_type": "muted", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null },
+          { "event_id": "EV-15", "pulse_position": 10, "stroke_type": "combined", "pitch_register": "high", "duration_pulses": 1, "dynamics": "f", "pitch_glide": null }
+        ]
+      },
+      {
+        "layer_id": "LY-0034-2",
+        "instrument_role": "omele-ako",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 6,
+        "offset_pulses": 0,
+        "stroke_events": [
+          { "event_id": "EV-16", "pulse_position": 1, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
+          { "event_id": "EV-17", "pulse_position": 4, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null }
+        ]
+      },
+      {
+        "layer_id": "LY-0034-3",
+        "instrument_role": "kudi",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 8,
+        "offset_pulses": 0,
+        "stroke_events": [
+          { "event_id": "EV-18", "pulse_position": 1, "stroke_type": "rim", "pitch_register": "high", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null },
+          { "event_id": "EV-19", "pulse_position": 5, "stroke_type": "rim", "pitch_register": "high", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0045",
+    "title": "Dundun Osun river song",
+    "tempo_bpm": 108,
+    "metric_ratio": "12:4",
+    "ensemble_ref": "ENS-Dundun-2",
+    "cultural_annotation": {
+      "orisha_id": "Osun",
+      "ceremony_type": "festival",
+      "regional_variant": "Ijebu",
+      "source_drummer_id": "Iya Ayanfemi Olusola",
+      "validation_status": "faculty-reviewed",
+      "recording_uri": "corpus/DP-0045.wav"
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-0045-1",
+        "instrument_role": "iya-ilu-dundun",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 12,
+        "offset_pulses": 0,
+        "stroke_events": [
+          { "event_id": "EV-20", "pulse_position": 2, "stroke_type": "open", "pitch_register": "glide", "duration_pulses": 2, "dynamics": "mf", "pitch_glide": { "start_register": "mid", "end_register": "low", "glide_direction": "descending", "duration_pulses": 2 } },
+          { "event_id": "EV-21", "pulse_position": 7, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null }
+        ]
+      },
+      {
+        "layer_id": "LY-0045-2",
+        "instrument_role": "kerikeri",
+        "pulse_unit": "quaver",
+        "metric_cycle_length": 4,
+        "offset_pulses": 1,
+        "stroke_events": [
+          { "event_id": "EV-22", "pulse_position": 1, "stroke_type": "open", "pitch_register": "high", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null },
+          { "event_id": "EV-23", "pulse_position": 3, "stroke_type": "muted", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0058",
+    "title": "Bata Obatala white cloth rite",
+    "tempo_bpm": 96,
+    "metric_ratio": "8:8",
+    "ensemble_ref": "ENS-Bata-3",
+    "cultural_annotation": {
+      "orisha_id": "Obatala",
+      "ceremony_type": "initiation",
+      "regional_variant": "Ekiti",
+      "source_drummer_id": "Baba Ayangbile Adeyemo",
+      "validation_status": "master-validated",
+      "recording_uri": "corpus/DP-0058.wav"
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-0058-1",
+        "instrument_role": "iya-ilu",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 8,
+        "offset_pulses": 0,
+        "stroke_events": [
+          { "event_id": "EV-24", "pulse_position": 1, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null },
+          { "event_id": "EV-25", "pulse_position": 4, "stroke_type": "muted", "pitch_register": "low", "duration_pulses": 1, "dynamics": "p", "pitch_glide": null },
+          { "event_id": "EV-26", "pulse_position": 6, "stroke_type": "open", "pitch_register": "high", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null }
+        ]
+      },
+      {
+        "layer_id": "LY-0058-2",
+        "instrument_role": "omele-abo",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 8,
+        "offset_pulses": 2,
+        "stroke_events": [
+          { "event_id": "EV-27", "pulse_position": 2, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "p", "pitch_glide": null },
+          { "event_id": "EV-28", "pulse_position": 6, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "p", "pitch_glide": null }
+        ]
+      }
+    ]
+  }
+]

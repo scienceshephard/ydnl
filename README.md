@@ -80,4 +80,3 @@ The prototype defaults to a JSON file store at `server/data/corpus.json` so it r
 ## License
 
 Released under the Creative Commons Attribution 4.0 International License (CC BY 4.0). The corpus, schema, and prototype are intended as open, shared preservation infrastructure.
-# ydnl

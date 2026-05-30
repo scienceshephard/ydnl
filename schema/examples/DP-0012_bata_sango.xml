@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ydnl version="1.0" xmlns="https://ydnl.org/schema/v1">
+  <drumPattern id="DP-0012" title="Bata Sango invocation" tempo_bpm="132" metric_ratio="12:8">
+    <culturalAnnotation>
+      <orisha>Sango</orisha>
+      <ceremony_type>festival</ceremony_type>
+      <regional_variant>Oyo</regional_variant>
+      <source_drummer>Alhaji Adewale Ayinla</source_drummer>
+      <validation_status>master-validated</validation_status>
+      <recording_uri>corpus/DP-0012.wav</recording_uri>
+    </culturalAnnotation>
+    <ensembleRef id="ENS-Bata-3" />
+    <rhythmicLayers>
+      <!-- Iya Ilu leads with a 12-pulse cycle -->
+      <layer layer_id="LY-0012-1" instrument_role="iya-ilu" metric_cycle_length="12" pulse_unit="semiquaver" offset_pulses="0">
+        <strokeEvent event_id="EV-1" pulse="1" stroke_type="open" pitch_register="high" duration_pulses="1" dynamics="f" />
+        <strokeEvent event_id="EV-2" pulse="3" stroke_type="muted" pitch_register="mid" duration_pulses="1" dynamics="mf" />
+        <strokeEvent event_id="EV-3" pulse="5" stroke_type="slap" pitch_register="low" duration_pulses="1" dynamics="mf" />
+        <strokeEvent event_id="EV-4" pulse="9" stroke_type="open" pitch_register="glide" dynamics="mf">
+          <pitchGlide start="mid" end="high" direction="ascending" duration_pulses="2" />
+        </strokeEvent>
+      </layer>
+      <!-- Omele Abo runs an independent 8-pulse cycle -->
+      <layer layer_id="LY-0012-2" instrument_role="omele-abo" metric_cycle_length="8" pulse_unit="semiquaver" offset_pulses="0">
+        <strokeEvent event_id="EV-5" pulse="1" stroke_type="open" pitch_register="low" duration_pulses="1" dynamics="mf" />
+        <strokeEvent event_id="EV-6" pulse="5" stroke_type="open" pitch_register="low" duration_pulses="1" dynamics="mf" />
+      </layer>
+    </rhythmicLayers>
+  </drumPattern>
+</ydnl>
