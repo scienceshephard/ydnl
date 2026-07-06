@@ -50,6 +50,23 @@ test("getSync returns null when no file exists, and 404s are cached", async () =
   assert.equal(fetchFn.calls.length, callsAfterPreload);
 });
 
+test("preload fetches each unique candidate path exactly once", async () => {
+  const repeatPattern = { rhythmic_layers: [{
+    instrument_role: "kudi", pulse_unit: "semiquaver", metric_cycle_length: 8,
+    stroke_events: [
+      { pulse_position: 1, stroke_type: "slap", pitch_register: "low" },
+      { pulse_position: 3, stroke_type: "slap", pitch_register: "low" },
+      { pulse_position: 5, stroke_type: "slap", pitch_register: "low" }
+    ]
+  }]};
+  const fetchFn = fakeFetch([]);
+  const bank = createSampleBank(fakeCtx(), { fetchFn });
+  await bank.preload(repeatPattern);
+  // Two unique candidates (slap_low.wav, slap.wav) -> exactly two fetches,
+  // even though three events queued them concurrently.
+  assert.equal(fetchFn.calls.length, 2);
+});
+
 test("glide events preload the start-register sample", async () => {
   const glidePattern = { rhythmic_layers: [{
     instrument_role: "iya-ilu-dundun", pulse_unit: "semiquaver", metric_cycle_length: 12,

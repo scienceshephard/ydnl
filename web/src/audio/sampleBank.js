@@ -9,19 +9,26 @@ import { sampleCandidates } from "./timing.js";
 
 export function createSampleBank(audioCtx, { fetchFn = (...a) => fetch(...a), baseUrl = "/" } = {}) {
   const cache = new Map(); // relative path -> AudioBuffer | null
+  const pending = new Map(); // relative path -> in-flight load promise
 
-  async function load(path) {
-    if (cache.has(path)) return cache.get(path);
-    let buffer = null;
-    try {
-      const res = await fetchFn(baseUrl + path);
-      if (res.ok) buffer = await audioCtx.decodeAudioData(await res.arrayBuffer());
-      else console.warn(`YDNL playback: no sample at ${path}, using synth fallback.`);
-    } catch (err) {
-      console.warn(`YDNL playback: could not decode ${path} (${err.message}), using synth fallback.`);
-    }
-    cache.set(path, buffer);
-    return buffer;
+  function load(path) {
+    if (cache.has(path)) return Promise.resolve(cache.get(path));
+    if (pending.has(path)) return pending.get(path);
+    const job = (async () => {
+      let buffer = null;
+      try {
+        const res = await fetchFn(baseUrl + path);
+        if (res.ok) buffer = await audioCtx.decodeAudioData(await res.arrayBuffer());
+        else console.warn(`YDNL playback: no sample at ${path}, using synth fallback.`);
+      } catch (err) {
+        console.warn(`YDNL playback: could not decode ${path} (${err.message}), using synth fallback.`);
+      }
+      cache.set(path, buffer);
+      pending.delete(path);
+      return buffer;
+    })();
+    pending.set(path, job);
+    return job;
   }
 
   // The register a stroke event actually needs a file for: glides play the
