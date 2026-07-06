@@ -10,7 +10,7 @@
     "web"
   ],
   "scripts": {
-    "test": "npm test -w ydnl-core",
+    "test": "npm test -w ydnl-core && npm test -w @ydnl/web",
     "server": "npm run dev -w @ydnl/server",
     "web": "npm run dev -w @ydnl/web",
     "dev": "echo \"Run 'npm run server' and 'npm run web' in two terminals.\""
