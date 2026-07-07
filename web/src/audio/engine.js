@@ -9,7 +9,7 @@
 
 import {
   secondsPerPulse, strokeTimesInWindow, layerPosition, patternDuration,
-  glideRateRatio, registerRateRatio, REGISTER_FREQ, DYNAMICS_GAIN
+  glideRateRatio, registerRateRatio, fileRegister, REGISTER_FREQ, DYNAMICS_GAIN
 } from "./timing.js";
 
 const SYNTH_DECAY = { open: 0.35, muted: 0.08, slap: 0.12, "heel-toe": 0.2, rim: 0.15, combined: 0.4 };
@@ -28,8 +28,7 @@ export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } =
     const ev = hit.ev;
     const src = audioCtx.createBufferSource();
     src.buffer = sample.buffer;
-    const fileRegister = ev.pitch_register === "glide" ? (ev.pitch_glide?.start_register || "mid") : ev.pitch_register;
-    const baseRate = sample.registerExact ? 1 : registerRateRatio(fileRegister);
+    const baseRate = sample.registerExact ? 1 : registerRateRatio(fileRegister(ev));
     src.playbackRate.setValueAtTime(baseRate, when);
     if (ev.pitch_glide) {
       const ratio = glideRateRatio(ev.pitch_glide.start_register, ev.pitch_glide.end_register);
@@ -102,9 +101,7 @@ export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } =
       const spp = secondsPerPulse(current.pattern.tempo_bpm, layer.pulse_unit);
       for (const hit of strokeTimesInWindow(layer, current.pattern.tempo_bpm, from, to, current.loop)) {
         const when = current.startTime + hit.when;
-        const fileRegister = hit.ev.pitch_register === "glide"
-          ? (hit.ev.pitch_glide?.start_register || "mid") : hit.ev.pitch_register;
-        const sample = bank.getSync(layer.instrument_role, hit.ev.stroke_type, fileRegister);
+        const sample = bank.getSync(layer.instrument_role, hit.ev.stroke_type, fileRegister(hit.ev));
         if (sample) playSample(hit, layer, when, spp, sample);
         else playSynth(hit, layer, when, spp);
       }

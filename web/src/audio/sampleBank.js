@@ -5,7 +5,7 @@
 // caches null so the engine falls back to synthesis without refetching.
 // fetch and decode are injectable for tests.
 
-import { sampleCandidates } from "./timing.js";
+import { sampleCandidates, fileRegister } from "./timing.js";
 
 export function createSampleBank(audioCtx, { fetchFn = (...a) => fetch(...a), baseUrl = "/" } = {}) {
   const cache = new Map(); // relative path -> AudioBuffer | null
@@ -29,12 +29,6 @@ export function createSampleBank(audioCtx, { fetchFn = (...a) => fetch(...a), ba
     })();
     pending.set(path, job);
     return job;
-  }
-
-  // The register a stroke event actually needs a file for: glides play the
-  // start-register sample and bend it.
-  function fileRegister(ev) {
-    return ev.pitch_register === "glide" ? (ev.pitch_glide?.start_register || "mid") : ev.pitch_register;
   }
 
   async function preload(pattern) {

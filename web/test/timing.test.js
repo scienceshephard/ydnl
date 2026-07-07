@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   secondsPerPulse, glideRateRatio, registerRateRatio, sampleCandidates,
-  layerPosition, strokeTimesInWindow, patternDuration, REGISTER_FREQ
+  layerPosition, strokeTimesInWindow, patternDuration, fileRegister, REGISTER_FREQ
 } from "../src/audio/timing.js";
 
 function layer(over = {}) {
@@ -96,6 +96,15 @@ test("strokeTimesInWindow returns no hits for a non-positive tempo", () => {
 test("layerPosition does not produce NaN for a zero-length cycle", () => {
   const pos = layerPosition(layer({ metric_cycle_length: 0 }), 120, 1, true);
   assert.deepEqual(pos, { pulseIndex: 0, fraction: 0, done: false });
+});
+
+test("fileRegister resolves the register a stroke actually needs a file for", () => {
+  assert.equal(
+    fileRegister({ pitch_register: "glide", pitch_glide: { start_register: "high", end_register: "low" } }),
+    "high"
+  );
+  assert.equal(fileRegister({ pitch_register: "glide" }), "mid"); // glide without pitch_glide falls back to mid
+  assert.equal(fileRegister({ pitch_register: "low" }), "low"); // plain event: its own register
 });
 
 test("patternDuration is the longest layer's single cycle", () => {

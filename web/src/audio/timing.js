@@ -25,6 +25,14 @@ export function registerRateRatio(register) {
   return (REGISTER_FREQ[register] || REGISTER_FREQ.mid) / REGISTER_FREQ.mid;
 }
 
+// The register a stroke event actually needs a file/rate for: glides play
+// (and preload) the start-register sample and bend it from there. Shared by
+// preload and playback lookups so they always agree on which file a glide
+// resolves to.
+export function fileRegister(ev) {
+  return ev.pitch_register === "glide" ? (ev.pitch_glide?.start_register || "mid") : ev.pitch_register;
+}
+
 // Ordered relative paths to try for a stroke's sample. "glide" is a pitch
 // treatment, not a recordable register, so it never names a file; callers
 // pass the glide's start register instead.
