@@ -15,7 +15,7 @@ export default function usePlayback() {
   const [playing, setPlaying] = useState(false);
   const [loop, setLoop] = useState(true);
   const [positions, setPositions] = useState(null);
-  const ref = useRef({ ctx: null, engine: null, raf: 0 });
+  const ref = useRef({ ctx: null, engine: null, raf: 0, starting: false, unmounted: false });
 
   function stopUi() {
     cancelAnimationFrame(ref.current.raf);
@@ -25,6 +25,7 @@ export default function usePlayback() {
 
   async function toggle(pattern) {
     const r = ref.current;
+    if (r.starting) return; // a play() is already in flight; ignore re-entrant clicks
     if (r.engine && r.engine.playing) {
       r.engine.stop();
       stopUi();
@@ -35,7 +36,19 @@ export default function usePlayback() {
       r.engine = createEngine(r.ctx, createSampleBank(r.ctx));
       r.engine.onEnded = stopUi;
     }
-    await r.engine.play(pattern, { loop });
+    r.starting = true;
+    try {
+      await r.engine.play(pattern, { loop });
+    } catch (err) {
+      stopUi();
+      return;
+    } finally {
+      r.starting = false;
+    }
+    if (r.unmounted) { // unmounted while play() was pending: silence and bail
+      r.engine.stop();
+      return;
+    }
     setPlaying(true);
     const frame = () => {
       if (!r.engine.playing) return;
@@ -47,6 +60,7 @@ export default function usePlayback() {
 
   useEffect(() => () => { // unmount: stop sound and animation
     const r = ref.current;
+    r.unmounted = true;
     if (r.engine) r.engine.stop();
     cancelAnimationFrame(r.raf);
   }, []);
