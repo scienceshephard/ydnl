@@ -42,6 +42,14 @@ test("detectOnsets finds each burst once, near its true time", () => {
   truth.forEach((t, i) => assert.ok(Math.abs(onsets[i] - t) < 0.025, `onset ${i}: ${onsets[i]} vs ${t}`));
 });
 
+test("a burst at the very start of the clip is still detected", () => {
+  const buf = makeBuffer(1.0);
+  addBurst(buf, { t0: 0.0, freq: 130 });
+  const onsets = detectOnsets(rmsEnvelope(buf, RATE));
+  assert.equal(onsets.length, 1, `expected 1 onset, got ${onsets.length}: ${onsets}`);
+  assert.ok(onsets[0] < 0.03, `onset should be near 0, got ${onsets[0]}`);
+});
+
 test("one stroke cannot fire twice (refractory period)", () => {
   const buf = makeBuffer(1.0);
   addBurst(buf, { t0: 0.2, freq: 130 });
@@ -62,6 +70,26 @@ test("estimatePitch reads a burst's frequency within 5%", () => {
     assert.ok(hz !== null, `no pitch found for ${freq}Hz`);
     assert.ok(Math.abs(hz - freq) / freq < 0.05, `estimated ${hz} for ${freq}`);
   }
+});
+
+test("estimatePitch holds a noisy low-register stroke (65Hz range edge)", () => {
+  // Without length normalization, long lags (low frequencies) are penalized:
+  // the lag-735 sum has ~28% fewer terms than the full-window energy divisor,
+  // so this noisy 65Hz burst falls under the 0.5 confidence floor and reads null.
+  const buf = makeBuffer(1.0);
+  addBurst(buf, { t0: 0.1, freq: 65, amp: 0.7, tau: 0.2 });
+  addNoise(buf, 0.5);
+  const hz = estimatePitch(buf, RATE, 0.13); // 30ms past the onset
+  assert.ok(hz !== null, "no pitch found for noisy 65Hz burst");
+  assert.ok(Math.abs(hz - 65) / 65 < 0.05, `estimated ${hz} for 65`);
+});
+
+test("estimatePitch reads a clean burst at the top of the range (480Hz)", () => {
+  const buf = makeBuffer(1.0);
+  addBurst(buf, { t0: 0.1, freq: 480, tau: 0.3 });
+  const hz = estimatePitch(buf, RATE, 0.13);
+  assert.ok(hz !== null, "no pitch found for 480Hz burst");
+  assert.ok(Math.abs(hz - 480) / 480 < 0.05, `estimated ${hz} for 480`);
 });
 
 test("estimatePitch returns null on noise", () => {

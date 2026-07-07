@@ -18,12 +18,23 @@ export function rmsEnvelope(samples, sampleRate, { frameSize = 1024, hop = 512 }
 
 // An onset is the envelope rising through 1.5x its local median (with an
 // absolute floor so silence cannot trigger). The refractory period stops a
-// single attack from firing on consecutive frames.
+// single attack from firing on consecutive frames. Frame 0 has no previous
+// frame to rise from, so it is checked directly against its own threshold:
+// a clip trimmed tight to the first hit still yields that onset.
 export function detectOnsets(envelope, { medianWindowSeconds = 0.5, riseFactor = 1.5, refractorySeconds = 0.05, floor = 0.01 } = {}) {
   const { frames, hopSeconds } = envelope;
   const half = Math.max(1, Math.round(medianWindowSeconds / hopSeconds / 2));
   const onsets = [];
   let last = -Infinity;
+  if (frames.length > 0) {
+    const sorted = Array.from(frames.slice(0, Math.min(frames.length, half))).sort((a, b) => a - b);
+    const median = sorted[Math.floor(sorted.length / 2)];
+    const threshold = Math.max(median * riseFactor, floor);
+    if (frames[0] >= threshold) {
+      onsets.push(0);
+      last = 0;
+    }
+  }
   for (let i = 1; i < frames.length; i++) {
     const lo = Math.max(0, i - half);
     const hi = Math.min(frames.length, i + half);
@@ -41,6 +52,9 @@ export function detectOnsets(envelope, { medianWindowSeconds = 0.5, riseFactor =
 
 // Autocorrelation pitch estimate over a short window. Returns null when no
 // candidate period is convincing (noise, silence, or a window past the clip).
+// Each lag's sum has n - lag terms, so it is length-normalized before dividing
+// by the full-window energy; otherwise long lags (low frequencies) are
+// penalized by up to ~28% and real low drum strokes fall under the floor.
 export function estimatePitch(samples, sampleRate, startSeconds, { windowSeconds = 0.06, minHz = 60, maxHz = 500, minCorrelation = 0.5 } = {}) {
   const start = Math.max(0, Math.round(startSeconds * sampleRate));
   const n = Math.min(Math.round(windowSeconds * sampleRate), samples.length - start);
@@ -53,9 +67,9 @@ export function estimatePitch(samples, sampleRate, startSeconds, { windowSeconds
   let bestLag = 0;
   let bestCorr = 0;
   for (let lag = minLag; lag <= maxLag; lag++) {
-    let corr = 0;
-    for (let i = 0; i + lag < n; i++) corr += samples[start + i] * samples[start + i + lag];
-    corr /= energy;
+    let sum = 0;
+    for (let i = 0; i + lag < n; i++) sum += samples[start + i] * samples[start + i + lag];
+    const corr = (sum * n) / ((n - lag) * energy);
     if (corr > bestCorr) { bestCorr = corr; bestLag = lag; }
   }
   if (bestLag === 0 || bestCorr < minCorrelation) return null;
