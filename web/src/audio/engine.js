@@ -9,16 +9,20 @@
 
 import {
   secondsPerPulse, strokeTimesInWindow, layerPosition, patternDuration,
-  glideRateRatio, registerRateRatio, fileRegister, REGISTER_FREQ, DYNAMICS_GAIN
+  glideRateRatio, registerRateRatio, registerFreq, fileRegister, DYNAMICS_GAIN
 } from "./timing.js";
 
 const SYNTH_DECAY = { open: 0.35, muted: 0.08, slap: 0.12, "heel-toe": 0.2, rim: 0.15, combined: 0.4 };
+// How hard each stroke's attack transient hits, relative to the stroke gain.
+const NOISE_LEVEL = { slap: 0.7, rim: 0.6, "heel-toe": 0.4, combined: 0.4, open: 0.25, muted: 0.15 };
+const MEMBRANE_DROP_S = 0.03; // the struck head's pitch settles within ~30ms
 
 export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } = {}) {
   let timer = null;
   let current = null;      // { pattern, loop, startTime, scheduledUntil, duration }
   const liveSources = new Set(); // pending sources; pruned via onended
   let onEnded = null;
+  let noiseBuf = null;     // shared white-noise buffer for attack transients
 
   function glideSeconds(ev, spp) {
     return ev.pitch_glide ? (ev.pitch_glide.duration_pulses || 1) * spp : 0;
@@ -26,12 +30,13 @@ export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } =
 
   function playSample(hit, layer, when, spp, sample) {
     const ev = hit.ev;
+    const role = layer.instrument_role;
     const src = audioCtx.createBufferSource();
     src.buffer = sample.buffer;
-    const baseRate = sample.registerExact ? 1 : registerRateRatio(fileRegister(ev));
+    const baseRate = sample.registerExact ? 1 : registerRateRatio(fileRegister(ev), role);
     src.playbackRate.setValueAtTime(baseRate, when);
     if (ev.pitch_glide) {
-      const ratio = glideRateRatio(ev.pitch_glide.start_register, ev.pitch_glide.end_register);
+      const ratio = glideRateRatio(ev.pitch_glide.start_register, ev.pitch_glide.end_register, role);
       src.playbackRate.linearRampToValueAtTime(baseRate * ratio, when + glideSeconds(ev, spp));
     }
     const g = audioCtx.createGain();
@@ -42,22 +47,58 @@ export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } =
     liveSources.add(src);
   }
 
+  function noiseBuffer() {
+    if (!noiseBuf) {
+      const rate = audioCtx.sampleRate || 44100;
+      const length = Math.floor(rate * 0.05);
+      noiseBuf = audioCtx.createBuffer(1, length, rate);
+      const data = noiseBuf.getChannelData(0);
+      for (let i = 0; i < length; i++) data[i] = Math.random() * 2 - 1;
+    }
+    return noiseBuf;
+  }
+
+  // The stick/hand impact: a short noise burst bandpassed around the drum's
+  // body resonance. Without it a struck membrane reads as a pure beep.
+  function playAttackNoise(when, f0, gain, strokeType) {
+    if (!audioCtx.createBuffer || !audioCtx.createBiquadFilter) return;
+    const noise = audioCtx.createBufferSource();
+    noise.buffer = noiseBuffer();
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = "bandpass";
+    filter.frequency.value = Math.min(4000, Math.max(500, f0 * 8));
+    const g = audioCtx.createGain();
+    g.gain.setValueAtTime(gain * (NOISE_LEVEL[strokeType] ?? 0.25), when);
+    g.gain.exponentialRampToValueAtTime(0.001, when + 0.04);
+    noise.connect(filter).connect(g).connect(audioCtx.destination);
+    noise.onended = () => liveSources.delete(noise);
+    noise.start(when);
+    noise.stop(when + 0.05);
+    liveSources.add(noise);
+  }
+
   function playSynth(hit, layer, when, spp) {
     const ev = hit.ev;
+    const role = layer.instrument_role;
     const startReg = ev.pitch_glide ? ev.pitch_glide.start_register : ev.pitch_register;
     const endReg = ev.pitch_glide ? ev.pitch_glide.end_register : startReg;
-    const f0 = REGISTER_FREQ[startReg] || REGISTER_FREQ.mid;
-    const f1 = REGISTER_FREQ[endReg] || f0;
+    const f0 = registerFreq(role, startReg);
+    const f1 = ev.pitch_glide ? registerFreq(role, endReg) : f0;
     const glide = glideSeconds(ev, spp);
-    const decay = (SYNTH_DECAY[ev.stroke_type] ?? 0.3) + glide;
+    // Deeper drums ring longer; scale the stroke decay by how low this voice sits.
+    const depth = Math.min(1.6, Math.max(0.8, Math.sqrt(130 / f0)));
+    const decay = (SYNTH_DECAY[ev.stroke_type] ?? 0.3) * depth + glide;
+    const gain = DYNAMICS_GAIN[ev.dynamics] ?? DYNAMICS_GAIN.mf;
 
+    // Membrane body: the hit lands sharp above the target pitch and falls
+    // onto it as the head settles, then any linguistic glide takes over.
     const osc = audioCtx.createOscillator();
     if (osc.type !== undefined) osc.type = (ev.stroke_type === "slap" || ev.stroke_type === "rim") ? "triangle" : "sine";
-    osc.frequency.setValueAtTime(f0, when);
-    if (f1 !== f0) osc.frequency.linearRampToValueAtTime(f1, when + glide);
+    osc.frequency.setValueAtTime(f0 * 1.5, when);
+    osc.frequency.exponentialRampToValueAtTime(f0, when + MEMBRANE_DROP_S);
+    if (f1 !== f0) osc.frequency.linearRampToValueAtTime(f1, when + Math.max(glide, MEMBRANE_DROP_S + 0.02));
 
     const g = audioCtx.createGain();
-    const gain = DYNAMICS_GAIN[ev.dynamics] ?? DYNAMICS_GAIN.mf;
     g.gain.setValueAtTime(gain, when);
     g.gain.exponentialRampToValueAtTime(0.001, when + decay);
 
@@ -66,6 +107,8 @@ export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } =
     osc.start(when);
     osc.stop(when + decay + 0.05);
     liveSources.add(osc);
+
+    playAttackNoise(when, f0, gain, ev.stroke_type);
   }
 
   // Shared teardown for stop() and natural end. When `silence` is true

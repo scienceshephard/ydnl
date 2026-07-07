@@ -3,6 +3,17 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createEngine } from "../src/audio/engine.js";
+import { registerFreq, ROLE_REGISTER_FREQ } from "../src/audio/timing.js";
+
+// An AudioParam stand-in that records every automation call so tests can
+// assert on scheduled values, not just that a method exists.
+function fakeParam() {
+  const param = { events: [], value: 0 };
+  for (const type of ["setValueAtTime", "linearRampToValueAtTime", "exponentialRampToValueAtTime"]) {
+    param[type] = (value, time) => param.events.push({ type, value, time });
+  }
+  return param;
+}
 
 function fakeNode() {
   const node = {
@@ -10,9 +21,9 @@ function fakeNode() {
     connect: (target) => target || node,
     start: (when) => node.started.push(when),
     stop: (when) => node.stopped.push(when),
-    frequency: { setValueAtTime: () => {}, linearRampToValueAtTime: () => {} },
-    playbackRate: { setValueAtTime: () => {}, linearRampToValueAtTime: () => {} },
-    gain: { setValueAtTime: () => {}, exponentialRampToValueAtTime: () => {} },
+    frequency: fakeParam(),
+    playbackRate: fakeParam(),
+    gain: fakeParam(),
     onended: null
   };
   return node;
@@ -20,10 +31,15 @@ function fakeNode() {
 
 function fakeCtx() {
   const ctx = {
-    currentTime: 0, destination: {}, sources: [], oscillators: [],
+    currentTime: 0, destination: {}, sources: [], oscillators: [], filters: [],
+    sampleRate: 48000,
     createBufferSource() { const n = fakeNode(); ctx.sources.push(n); return n; },
     createOscillator() { const n = fakeNode(); ctx.oscillators.push(n); return n; },
     createGain: fakeNode,
+    createBiquadFilter() { const n = fakeNode(); ctx.filters.push(n); return n; },
+    createBuffer(_channels, length, _rate) {
+      return { length, getChannelData: () => new Float32Array(length) };
+    },
     resume: async () => {}
   };
   return ctx;
@@ -153,6 +169,57 @@ test("once mode natural end lets ringing sources decay instead of chopping them"
   assert.equal(engine.playing, false);
   for (const osc of ctx.oscillators) {
     assert.equal(osc.stopped.length, 1, "natural end must not add a second, silencing stop()");
+  }
+});
+
+function ganganPattern(strokeOver = {}) {
+  return pattern([
+    { instrument_role: "gangan", pulse_unit: "semiquaver", metric_cycle_length: 2,
+      stroke_events: [{ pulse_position: 1, stroke_type: "open", pitch_register: "mid", ...strokeOver }] }
+  ]);
+}
+
+test("synth voice lands on the drum's own register with a membrane pitch drop", async () => {
+  const ctx = fakeCtx();
+  const engine = createEngine(ctx, emptyBank, { tickMs: 1e9, lookaheadS: 0.1 });
+  await engine.play(ganganPattern(), { loop: false });
+  try {
+    const target = registerFreq("gangan", "mid"); // NOT the generic 170 Hz anchor
+    const events = ctx.oscillators[0].frequency.events;
+    const attack = events.find(e => e.type === "setValueAtTime");
+    const drop = events.find(e => e.type === "exponentialRampToValueAtTime");
+    assert.ok(drop, "membrane voice must sweep down onto the target pitch");
+    assert.equal(drop.value, target, "pitch drop must land on the drum's register frequency");
+    assert.ok(attack.value > drop.value, "attack must start above where the pitch lands");
+  } finally {
+    engine.stop();
+  }
+});
+
+test("synth strokes carry a filtered noise attack transient", async () => {
+  const ctx = fakeCtx();
+  const engine = createEngine(ctx, emptyBank, { tickMs: 1e9, lookaheadS: 0.1 });
+  await engine.play(ganganPattern({ stroke_type: "slap", pitch_register: "low" }), { loop: false });
+  try {
+    assert.ok(ctx.sources.length >= 1, "a noise burst buffer source must be scheduled");
+    assert.ok(ctx.filters.length >= 1, "the noise must pass through a filter, not raw white noise");
+    assert.equal(ctx.sources[0].started.length, 1);
+  } finally {
+    engine.stop();
+  }
+});
+
+test("register-agnostic samples are rate-shifted within the drum's register range", async () => {
+  const ctx = fakeCtx();
+  const bank = { preload: async () => {}, getSync: () => ({ buffer: { fake: true }, registerExact: false }) };
+  const engine = createEngine(ctx, bank, { tickMs: 1e9, lookaheadS: 0.1 });
+  await engine.play(ganganPattern({ pitch_register: "low" }), { loop: false });
+  try {
+    const g = ROLE_REGISTER_FREQ.gangan;
+    const set = ctx.sources[0].playbackRate.events.find(e => e.type === "setValueAtTime");
+    assert.equal(set.value, g.low / g.mid, "rate shift must use gangan's own registers, not the generic anchors");
+  } finally {
+    engine.stop();
   }
 });
 

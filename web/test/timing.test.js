@@ -3,7 +3,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   secondsPerPulse, glideRateRatio, registerRateRatio, sampleCandidates,
-  layerPosition, strokeTimesInWindow, patternDuration, fileRegister, REGISTER_FREQ
+  layerPosition, strokeTimesInWindow, patternDuration, fileRegister,
+  registerFreq, REGISTER_FREQ, ROLE_REGISTER_FREQ
 } from "../src/audio/timing.js";
 
 function layer(over = {}) {
@@ -32,6 +33,36 @@ test("glide and register rate ratios follow the anchor frequencies", () => {
   assert.equal(registerRateRatio("mid"), 1);
   assert.equal(registerRateRatio("low"), REGISTER_FREQ.low / REGISTER_FREQ.mid);
   assert.equal(registerRateRatio("unknown"), 1);
+});
+
+test("each drum speaks in its own register range", () => {
+  // the mother drums are the deep voices of their ensembles
+  assert.ok(ROLE_REGISTER_FREQ["iya-ilu"].low < ROLE_REGISTER_FREQ["omele-abo"].low);
+  assert.ok(ROLE_REGISTER_FREQ["iya-ilu-dundun"].low < ROLE_REGISTER_FREQ.gangan.low);
+  // gangan sits below the small chattering drums
+  assert.ok(ROLE_REGISTER_FREQ.gangan.mid < ROLE_REGISTER_FREQ["omele-ako"].mid);
+  assert.ok(ROLE_REGISTER_FREQ.gangan.mid < ROLE_REGISTER_FREQ.kudi.mid);
+  // every role covers all three registers in ascending order
+  for (const [role, f] of Object.entries(ROLE_REGISTER_FREQ)) {
+    assert.ok(f.low < f.mid && f.mid < f.high, `${role} registers must ascend`);
+  }
+});
+
+test("registerFreq resolves per role with a generic fallback", () => {
+  assert.equal(registerFreq("gangan", "mid"), ROLE_REGISTER_FREQ.gangan.mid);
+  assert.equal(registerFreq("iya-ilu", "low"), ROLE_REGISTER_FREQ["iya-ilu"].low);
+  // unknown role falls back to the generic anchors
+  assert.equal(registerFreq("unknown-drum", "mid"), REGISTER_FREQ.mid);
+  // unknown register falls back to the drum's own mid
+  assert.equal(registerFreq("gangan", "weird"), ROLE_REGISTER_FREQ.gangan.mid);
+});
+
+test("rate ratios are computed within the drum's own register range", () => {
+  const g = ROLE_REGISTER_FREQ.gangan;
+  assert.equal(glideRateRatio("mid", "high", "gangan"), g.high / g.mid);
+  assert.equal(glideRateRatio("high", "low", "gangan"), g.low / g.high);
+  assert.equal(registerRateRatio("low", "gangan"), g.low / g.mid);
+  assert.equal(registerRateRatio("mid", "gangan"), 1);
 });
 
 test("sampleCandidates tries register-exact then register-agnostic", () => {

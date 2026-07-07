@@ -7,9 +7,26 @@
 
 export const PULSE_FRACTION = { crotchet: 1, quaver: 0.5, semiquaver: 0.25, demisemiquaver: 0.125 };
 
-// Register anchors in the talking-drum range. Glides and register-shifted
-// samples derive their playbackRate ratios from these.
+// Generic register anchors, used only for roles missing from
+// ROLE_REGISTER_FREQ. Each drum otherwise speaks in its own range below.
 export const REGISTER_FREQ = { low: 120, mid: 170, high: 240 };
+
+// Per-drum register ranges (Hz). The mother drums (iya-ilu, iya-ilu-dundun)
+// are the deep voices of their ensembles; gangan and kerikeri sit in a
+// low-mid band; the small omele/kudi chatter up high; the gudugudu kettle
+// is nearly fixed, so its range is deliberately narrow. Glide and
+// register-shift ratios are computed within a drum's own range, so dundun
+// speech surrogacy keeps its sweep regardless of how deep the drum sits.
+export const ROLE_REGISTER_FREQ = {
+  "iya-ilu":        { low: 70,  mid: 95,  high: 130 },
+  "omele-abo":      { low: 130, mid: 170, high: 220 },
+  "omele-ako":      { low: 200, mid: 260, high: 330 },
+  "kudi":           { low: 230, mid: 300, high: 380 },
+  "iya-ilu-dundun": { low: 75,  mid: 105, high: 150 },
+  "gangan":         { low: 90,  mid: 130, high: 180 },
+  "kerikeri":       { low: 80,  mid: 110, high: 150 },
+  "gudugudu":       { low: 140, mid: 160, high: 180 }
+};
 
 export const DYNAMICS_GAIN = { pp: 0.3, p: 0.45, mp: 0.6, mf: 0.7, f: 0.85, ff: 1.0 };
 
@@ -17,12 +34,19 @@ export function secondsPerPulse(tempoBpm, pulseUnit) {
   return (60 / tempoBpm) * (PULSE_FRACTION[pulseUnit] ?? PULSE_FRACTION.semiquaver);
 }
 
-export function glideRateRatio(startRegister, endRegister) {
-  return (REGISTER_FREQ[endRegister] || REGISTER_FREQ.mid) / (REGISTER_FREQ[startRegister] || REGISTER_FREQ.mid);
+// The frequency a drum sounds for a register: the role's own range when we
+// know the drum, the generic anchors otherwise.
+export function registerFreq(role, register) {
+  const table = ROLE_REGISTER_FREQ[role] || REGISTER_FREQ;
+  return table[register] || table.mid;
 }
 
-export function registerRateRatio(register) {
-  return (REGISTER_FREQ[register] || REGISTER_FREQ.mid) / REGISTER_FREQ.mid;
+export function glideRateRatio(startRegister, endRegister, role) {
+  return registerFreq(role, endRegister) / registerFreq(role, startRegister);
+}
+
+export function registerRateRatio(register, role) {
+  return registerFreq(role, register) / registerFreq(role, "mid");
 }
 
 // The register a stroke event actually needs a file/rate for: glides play
