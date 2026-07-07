@@ -69,12 +69,29 @@ export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } =
     liveSources.add(osc);
   }
 
+  // Shared teardown for stop() and natural end. When `silence` is true
+  // (explicit stop()), every still-ringing source is cut off immediately.
+  // When false (natural once-mode end), sources are left alone to finish
+  // their own scheduled decay; they self-prune via onended. Clearing the
+  // Set itself is safe even though the sources are still live: onended's
+  // `liveSources.delete(src)` on an already-cleared Set is just a no-op.
+  function halt(silence) {
+    if (timer) { clearInterval(timer); timer = null; }
+    if (silence) {
+      for (const src of liveSources) {
+        try { src.stop(); } catch { /* already ended */ }
+      }
+    }
+    liveSources.clear();
+    current = null;
+  }
+
   function tick() {
     if (!current) return;
     const elapsed = audioCtx.currentTime - current.startTime;
     if (!current.loop && elapsed >= current.duration) {
       const cb = onEnded;
-      stop();
+      halt(false);
       if (cb) cb();
       return;
     }
@@ -112,12 +129,7 @@ export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } =
   }
 
   function stop() {
-    if (timer) { clearInterval(timer); timer = null; }
-    for (const src of liveSources) {
-      try { src.stop(); } catch { /* already ended */ }
-    }
-    liveSources.clear();
-    current = null;
+    halt(true);
   }
 
   function positionsAt(audioTime) {

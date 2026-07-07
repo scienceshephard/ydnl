@@ -136,6 +136,26 @@ test("finished sources are pruned so stop() never touches them", async () => {
   }
 });
 
+test("once mode natural end lets ringing sources decay instead of chopping them", async () => {
+  const ctx = fakeCtx();
+  const engine = createEngine(ctx, emptyBank, { tickMs: 1e9, lookaheadS: 1.0 });
+  let ended = 0;
+  engine.onEnded = () => { ended += 1; };
+  await engine.play(twoAgainstThree, { loop: false });
+  engine.tick(); // schedules the once-through hits; each oscillator gets its 1 decay stop()
+  assert.ok(ctx.oscillators.length >= 2);
+  for (const osc of ctx.oscillators) {
+    assert.equal(osc.stopped.length, 1, "oscillator should have exactly its scheduled decay stop()");
+  }
+  ctx.currentTime = 0.5; // past patternDuration: natural end
+  engine.tick();
+  assert.equal(ended, 1);
+  assert.equal(engine.playing, false);
+  for (const osc of ctx.oscillators) {
+    assert.equal(osc.stopped.length, 1, "natural end must not add a second, silencing stop()");
+  }
+});
+
 test("positionsAt reports one position per layer while playing", async () => {
   const ctx = fakeCtx();
   const engine = createEngine(ctx, emptyBank, { tickMs: 1e9, lookaheadS: 0.3 });
