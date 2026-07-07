@@ -14,6 +14,9 @@ const GLIDE_CENTS = 200;          // two semitones: above jitter, below real dun
 const MUTED_HALF_LIFE_S = 0.09;   // choked strokes die faster than this
 const PITCH_A_OFFSET_S = 0.03;    // skip the attack transient (membrane settle)
 const PITCH_B_MAX_OFFSET_S = 0.25;
+// Must match dsp.js's estimatePitch default windowSeconds: window B is
+// positioned so this whole span stays inside the inter-onset gap.
+const PITCH_WINDOW_S = 0.06;
 
 function nearestRegister(role, hz) {
   const table = ROLE_REGISTER_FREQ[role] || REGISTER_FREQ;
@@ -47,7 +50,12 @@ export function transcribe(samples, sampleRate, { role, tempoBpm, pulseUnit = "s
 
     const gap = (onsets[k + 1] ?? t + 0.4) - t;
     const fA = estimatePitch(samples, sampleRate, t + PITCH_A_OFFSET_S);
-    const fB = estimatePitch(samples, sampleRate, t + Math.min(PITCH_B_MAX_OFFSET_S, gap * 0.6));
+    // On fast passages the gap can be smaller than PITCH_A_OFFSET_S + the
+    // pitch window; clamp so window B never straddles the next onset. When
+    // the gap is tiny B collapses onto A, cents -> ~0, and the stroke
+    // degrades to a plain register - the intended conservative fallback.
+    const tB = t + Math.max(PITCH_A_OFFSET_S, Math.min(PITCH_B_MAX_OFFSET_S, gap * 0.6, gap - PITCH_WINDOW_S));
+    const fB = estimatePitch(samples, sampleRate, tB);
     const strokeType = decayHalfLife(envelope, t) < MUTED_HALF_LIFE_S ? "muted" : "open";
 
     let register;

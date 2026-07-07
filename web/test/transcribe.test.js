@@ -46,6 +46,8 @@ test("strokes land on the right pulses with the right registers", () => {
 
 test("a rising sweep becomes an ascending glide on a tension drum", () => {
   const buf = makeBuffer(1.5);
+  // tau 0.4 is empirically tuned: tau >= 0.5 sustains long enough to inflate
+  // the onset detector's local-median threshold, and the onset never fires.
   addBurst(buf, { t0: 0.1, freq: DUNDUN.mid, freqEnd: DUNDUN.high, duration: 0.45, tau: 0.4 });
   const { pattern } = transcribe(buf, RATE, OPTS);
   const ev = pattern.rhythmic_layers[0].stroke_events[0];
@@ -58,11 +60,36 @@ test("a rising sweep becomes an ascending glide on a tension drum", () => {
 
 test("the same sweep on a fixed-pitch drum yields a plain register, never a glide", () => {
   const buf = makeBuffer(1.5);
+  // tau 0.3 is empirically tuned: tau >= 0.5 sustains long enough to inflate
+  // the onset detector's local-median threshold, and the onset never fires.
   addBurst(buf, { t0: 0.1, freq: 95, freqEnd: 130, duration: 0.45, tau: 0.3 });
   const { pattern } = transcribe(buf, RATE, { ...OPTS, role: "iya-ilu", glideCapable: false });
   const ev = pattern.rhythmic_layers[0].stroke_events[0];
   assert.notEqual(ev.pitch_register, "glide");
   assert.equal(ev.pitch_glide, null);
+});
+
+test("adjacent fast strokes in different registers do not read as a false glide", () => {
+  // Two semiquavers at 120bpm (0.125s apart) on a glide-capable drum, low then
+  // high register. Gap 0.125s < 0.15s: window B's old start (t + gap*0.6 =
+  // t+0.075) plus the fixed 0.06s pitch window would run to t+0.135, past the
+  // next onset at t+0.125 - reading the second stroke's attack as part of the
+  // first stroke's window B and manufacturing a glide that never happened.
+  const buf = makeBuffer(1.0);
+  addBurst(buf, { t0: 0.1, freq: DUNDUN.low, tau: 0.03, duration: 0.08 });
+  // Longer sustain (tau 0.08, duration 0.3) on the second burst so its
+  // periodic content actually fills window B once the old code's window
+  // runs past the next onset - a short burst decays before window B gets
+  // there, masking the bug.
+  addBurst(buf, { t0: 0.225, freq: DUNDUN.high, tau: 0.08, duration: 0.3 });
+  const { pattern, report } = transcribe(buf, RATE, OPTS);
+  const evs = pattern.rhythmic_layers[0].stroke_events;
+  assert.deepEqual(evs.map(e => e.pulse_position), [1, 2]);
+  assert.notEqual(evs[0].pitch_register, "glide");
+  assert.notEqual(evs[1].pitch_register, "glide");
+  assert.equal(evs[0].pitch_glide, null);
+  assert.equal(evs[1].pitch_glide, null);
+  assert.equal(report.skipped, 0);
 });
 
 test("beyond-cycle and colliding onsets are skipped and counted", () => {
@@ -87,6 +114,8 @@ test("silence reports no-onsets instead of a pattern", () => {
 
 test("the draft validates once a human completes the cultural annotation", () => {
   const buf = makeBuffer(1.5);
+  // tau 0.4 is empirically tuned: tau >= 0.5 sustains long enough to inflate
+  // the onset detector's local-median threshold, and the onset never fires.
   addBurst(buf, { t0: 0.1, freq: DUNDUN.mid, freqEnd: DUNDUN.high, duration: 0.45, tau: 0.4 });
   addBurst(buf, { t0: 0.6, freq: DUNDUN.low });
   const { pattern } = transcribe(buf, RATE, OPTS);

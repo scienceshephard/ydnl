@@ -32,7 +32,7 @@ export default function TranscribeView({ vocab, onOpenInEncoder }) {
         decoded = await getAudioContext().decodeAudioData(await file.arrayBuffer());
       } catch {
         setError("Couldn't read this audio file - try a WAV or MP3 export.");
-        return;
+        return; // early return is safe: the outer finally still resets busy
       }
       const mono = new Float32Array(decoded.length);
       for (let ch = 0; ch < decoded.numberOfChannels; ch++) {
