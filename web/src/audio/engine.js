@@ -17,7 +17,7 @@ const SYNTH_DECAY = { open: 0.35, muted: 0.08, slap: 0.12, "heel-toe": 0.2, rim:
 export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } = {}) {
   let timer = null;
   let current = null;      // { pattern, loop, startTime, scheduledUntil, duration }
-  let liveSources = [];
+  const liveSources = new Set(); // pending sources; pruned via onended
   let onEnded = null;
 
   function glideSeconds(ev, spp) {
@@ -38,8 +38,9 @@ export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } =
     const g = audioCtx.createGain();
     g.gain.setValueAtTime(DYNAMICS_GAIN[ev.dynamics] ?? DYNAMICS_GAIN.mf, when);
     src.connect(g).connect(audioCtx.destination);
+    src.onended = () => liveSources.delete(src);
     src.start(when);
-    liveSources.push(src);
+    liveSources.add(src);
   }
 
   function playSynth(hit, layer, when, spp) {
@@ -62,9 +63,10 @@ export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } =
     g.gain.exponentialRampToValueAtTime(0.001, when + decay);
 
     osc.connect(g).connect(audioCtx.destination);
+    osc.onended = () => liveSources.delete(osc);
     osc.start(when);
     osc.stop(when + decay + 0.05);
-    liveSources.push(osc);
+    liveSources.add(osc);
   }
 
   function tick() {
@@ -114,7 +116,7 @@ export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } =
     for (const src of liveSources) {
       try { src.stop(); } catch { /* already ended */ }
     }
-    liveSources = [];
+    liveSources.clear();
     current = null;
   }
 

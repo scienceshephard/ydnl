@@ -114,6 +114,28 @@ test("stop() silences every pending scheduled source", async () => {
   }
 });
 
+test("finished sources are pruned so stop() never touches them", async () => {
+  const ctx = fakeCtx();
+  const engine = createEngine(ctx, emptyBank, { tickMs: 1e9, lookaheadS: 1.0 });
+  await engine.play(twoAgainstThree, { loop: true });
+  try {
+    engine.tick(); // schedules ~7 oscillators up to 1s ahead
+    assert.ok(ctx.oscillators.length >= 7);
+    for (const osc of ctx.oscillators) {
+      assert.equal(typeof osc.onended, "function", "engine must assign onended for pruning");
+      osc.onended(); // simulate the source finishing on its own
+    }
+    assert.equal(engine.playing, true); // pruning does not affect playback state
+    const stopCountsBefore = ctx.oscillators.map(o => o.stopped.length);
+    engine.stop();
+    const stopCountsAfter = ctx.oscillators.map(o => o.stopped.length);
+    assert.deepEqual(stopCountsAfter, stopCountsBefore); // already pruned: untouched
+    assert.equal(engine.playing, false);
+  } finally {
+    engine.stop(); // idempotent; keeps a failing assert from leaking the timer
+  }
+});
+
 test("positionsAt reports one position per layer while playing", async () => {
   const ctx = fakeCtx();
   const engine = createEngine(ctx, emptyBank, { tickMs: 1e9, lookaheadS: 0.3 });
