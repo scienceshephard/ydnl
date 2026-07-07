@@ -81,6 +81,39 @@ test("samples are used when the bank has a buffer", async () => {
   engine.stop();
 });
 
+test("once mode with an empty pattern ends immediately without arming a timer", async () => {
+  const ctx = fakeCtx();
+  const engine = createEngine(ctx, emptyBank, { tickMs: 1e9, lookaheadS: 1.0 });
+  let ended = 0;
+  engine.onEnded = () => { ended += 1; };
+  const realSetInterval = globalThis.setInterval;
+  const armed = [];
+  // Record arms without starting a real timer, so a leaked interval cannot
+  // keep the test process alive; clearInterval on the fake handle is a no-op.
+  globalThis.setInterval = (...args) => { armed.push(args); return 0; };
+  try {
+    await engine.play({ tempo_bpm: 120, rhythmic_layers: [] }, { loop: false });
+  } finally {
+    globalThis.setInterval = realSetInterval;
+  }
+  assert.equal(ended, 1);
+  assert.equal(engine.playing, false);
+  assert.equal(armed.length, 0); // no dangling interval after instant end
+});
+
+test("stop() silences every pending scheduled source", async () => {
+  const ctx = fakeCtx();
+  const engine = createEngine(ctx, emptyBank, { tickMs: 1e9, lookaheadS: 1.0 });
+  await engine.play(twoAgainstThree, { loop: true });
+  engine.tick(); // schedules ~7 oscillators up to 1s ahead
+  assert.ok(ctx.oscillators.length >= 7);
+  engine.stop();
+  for (const osc of ctx.oscillators) {
+    // one stop scheduled at creation (decay end) + one immediate from engine.stop()
+    assert.ok(osc.stopped.length >= 2, `oscillator not silenced: ${osc.stopped.length} stop calls`);
+  }
+});
+
 test("positionsAt reports one position per layer while playing", async () => {
   const ctx = fakeCtx();
   const engine = createEngine(ctx, emptyBank, { tickMs: 1e9, lookaheadS: 0.3 });

@@ -104,7 +104,9 @@ export function createEngine(audioCtx, bank, { tickMs = 25, lookaheadS = 0.1 } =
       duration: patternDuration(pattern)
     };
     tick();
-    timer = setInterval(tick, tickMs);
+    // The first tick can end zero-duration once-mode playback synchronously
+    // (stop() already ran); only arm the timer if we are still playing.
+    if (current) timer = setInterval(tick, tickMs);
   }
 
   function stop() {
