@@ -11,6 +11,16 @@ import { createSampleBank } from "./sampleBank.js";
 
 const AudioCtx = typeof window !== "undefined" ? (window.AudioContext || window.webkitAudioContext) : null;
 
+// One AudioContext for the whole session (browsers cap how many can run at
+// once), lazily created on the first Play click since autoplay policy
+// requires a user gesture. Never closed - it outlives any single hook
+// instance/mount.
+let sharedCtx = null;
+function getAudioContext() {
+  if (!sharedCtx) sharedCtx = new AudioCtx();
+  return sharedCtx;
+}
+
 export default function usePlayback() {
   const [playing, setPlaying] = useState(false);
   const [loop, setLoop] = useState(true);
@@ -32,7 +42,7 @@ export default function usePlayback() {
       return;
     }
     if (!r.ctx) {
-      r.ctx = new AudioCtx();
+      r.ctx = getAudioContext();
       r.engine = createEngine(r.ctx, createSampleBank(r.ctx));
       r.engine.onEnded = stopUi;
     }
@@ -40,6 +50,7 @@ export default function usePlayback() {
     try {
       await r.engine.play(pattern, { loop });
     } catch (err) {
+      console.warn("YDNL playback: could not start playback.", err);
       stopUi();
       return;
     } finally {
@@ -58,11 +69,17 @@ export default function usePlayback() {
     r.raf = requestAnimationFrame(frame);
   }
 
-  useEffect(() => () => { // unmount: stop sound and animation
-    const r = ref.current;
-    r.unmounted = true;
-    if (r.engine) r.engine.stop();
-    cancelAnimationFrame(r.raf);
+  useEffect(() => {
+    // StrictMode mounts, unmounts, then remounts the same ref in dev; without
+    // this reset a remounted hook would stay permanently "unmounted" and
+    // silently no-op every future toggle().
+    ref.current.unmounted = false;
+    return () => { // unmount: stop sound and animation
+      const r = ref.current;
+      r.unmounted = true;
+      if (r.engine) r.engine.stop();
+      cancelAnimationFrame(r.raf);
+    };
   }, []);
 
   return { supported: Boolean(AudioCtx), playing, loop, setLoop, toggle, positions };
