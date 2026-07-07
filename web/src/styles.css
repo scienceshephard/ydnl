@@ -87,3 +87,10 @@ button.danger { color: var(--err); border-color: #fecaca; }
 .transport-play { min-width: 84px; }
 .transport-loop { display: flex; align-items: center; gap: 4px; font-size: 0.85rem; color: #475569; }
 .transport-meta { font-size: 0.8rem; color: #94a3b8; margin-left: auto; }
+
+/* Transcribe tab */
+.transcribe-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+.transcribe-form label { display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; color: #475569; }
+.transcribe-table { border-collapse: collapse; margin-bottom: 12px; }
+.transcribe-table th, .transcribe-table td { padding: 4px 12px; border-bottom: 1px solid #e2e8f0; text-align: left; font-size: 0.9rem; }
+.hint { color: #64748b; font-size: 0.85rem; }
