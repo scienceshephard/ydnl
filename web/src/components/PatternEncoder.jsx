@@ -14,17 +14,17 @@ const blankLayer = (vocab) => ({
   stroke_events: []
 });
 
-export default function PatternEncoder({ vocab, onSaved }) {
-  const [title, setTitle] = useState("New pattern");
-  const [tempo, setTempo] = useState(120);
+export default function PatternEncoder({ vocab, onSaved, seed }) {
+  const [title, setTitle] = useState(seed?.title || "New pattern");
+  const [tempo, setTempo] = useState(seed?.tempo_bpm || 120);
   const [ca, setCa] = useState({
-    orisha_id: vocab.orisha?.[0] || "Sango",
-    ceremony_type: vocab.ceremony_types?.[0] || "festival",
-    regional_variant: vocab.regional_variants?.[0] || "Oyo",
-    source_drummer_id: "",
+    orisha_id: seed?.cultural_annotation?.orisha_id || vocab.orisha?.[0] || "Sango",
+    ceremony_type: seed?.cultural_annotation?.ceremony_type || vocab.ceremony_types?.[0] || "festival",
+    regional_variant: seed?.cultural_annotation?.regional_variant || vocab.regional_variants?.[0] || "Oyo",
+    source_drummer_id: seed?.cultural_annotation?.source_drummer_id || "",
     validation_status: "draft"
   });
-  const [layers, setLayers] = useState([blankLayer(vocab)]);
+  const [layers, setLayers] = useState(seed?.rhythmic_layers?.length ? seed.rhythmic_layers : [blankLayer(vocab)]);
   const [msg, setMsg] = useState(null);
 
   const pattern = {
@@ -33,8 +33,24 @@ export default function PatternEncoder({ vocab, onSaved }) {
     rhythmic_layers: layers
   };
 
+  function canGlide(role) {
+    return (vocab.glide_capable_roles || []).includes(role);
+  }
   function updateLayer(i, patch) {
-    setLayers(layers.map((l, idx) => idx === i ? { ...l, ...patch } : l));
+    setLayers(layers.map((l, idx) => {
+      if (idx !== i) return l;
+      const next = { ...l, ...patch };
+      // Switching to a fixed-pitch drum (any bata drum or the gudugudu)
+      // removes glides: only Dundun tension drums can bend pitch.
+      if (patch.instrument_role && !canGlide(patch.instrument_role)) {
+        next.stroke_events = next.stroke_events.map(ev =>
+          ev.pitch_glide || ev.pitch_register === "glide"
+            ? { ...ev, pitch_register: "high", pitch_glide: null }
+            : ev
+        );
+      }
+      return next;
+    }));
   }
   function addEvent(i) {
     const l = layers[i];
@@ -124,7 +140,7 @@ export default function PatternEncoder({ vocab, onSaved }) {
                     {vocab.stroke_types?.map(o => <option key={o}>{o}</option>)}
                   </select>
                   <select value={ev.pitch_register} onChange={e => updateEvent(i, j, { pitch_register: e.target.value })}>
-                    {vocab.pitch_registers?.map(o => <option key={o}>{o}</option>)}
+                    {vocab.pitch_registers?.filter(o => o !== "glide" || canGlide(l.instrument_role)).map(o => <option key={o}>{o}</option>)}
                   </select>
                   {ev.pitch_register === "glide" && ev.pitch_glide && (
                     <span className="glide-fields">
