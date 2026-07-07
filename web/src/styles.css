@@ -81,3 +81,9 @@ button.danger { color: var(--err); border-color: #fecaca; }
 .code { background: #0f172a; color: #e2e8f0; padding: 14px; border-radius: 10px; font-size: 12px; overflow-x: auto; line-height: 1.5; }
 
 .foot { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; text-align: center; }
+
+/* Playback transport */
+.transport { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.transport-play { min-width: 84px; }
+.transport-loop { display: flex; align-items: center; gap: 4px; font-size: 0.85rem; color: #475569; }
+.transport-meta { font-size: 0.8rem; color: #94a3b8; margin-left: auto; }
