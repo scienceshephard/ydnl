@@ -26,32 +26,36 @@ export default function TranscribeView({ vocab, onOpenInEncoder }) {
     setBusy(true);
     setError("");
     setResult(null);
-    let decoded;
     try {
-      decoded = await getAudioContext().decodeAudioData(await file.arrayBuffer());
-    } catch {
-      setError("Couldn't read this audio file - try a WAV or MP3 export.");
+      let decoded;
+      try {
+        decoded = await getAudioContext().decodeAudioData(await file.arrayBuffer());
+      } catch {
+        setError("Couldn't read this audio file - try a WAV or MP3 export.");
+        return;
+      }
+      const mono = new Float32Array(decoded.length);
+      for (let ch = 0; ch < decoded.numberOfChannels; ch++) {
+        const data = decoded.getChannelData(ch);
+        for (let i = 0; i < mono.length; i++) mono[i] += data[i] / decoded.numberOfChannels;
+      }
+      const out = transcribe(mono, decoded.sampleRate, {
+        role,
+        tempoBpm: Number(bpm),
+        pulseUnit,
+        cycleLength: Number(cycleLength),
+        glideCapable: (vocab.glide_capable_roles || []).includes(role)
+      });
+      if (!out.pattern) {
+        setError("No drum strokes detected - check the recording level or trim leading silence.");
+      } else if (out.report.rows.length === 0) {
+        setError("Strokes were detected, but none landed inside the cycle - check the tempo and cycle length.");
+      } else {
+        setResult(out);
+      }
+    } finally {
       setBusy(false);
-      return;
     }
-    const mono = new Float32Array(decoded.length);
-    for (let ch = 0; ch < decoded.numberOfChannels; ch++) {
-      const data = decoded.getChannelData(ch);
-      for (let i = 0; i < mono.length; i++) mono[i] += data[i] / decoded.numberOfChannels;
-    }
-    const out = transcribe(mono, decoded.sampleRate, {
-      role,
-      tempoBpm: Number(bpm),
-      pulseUnit,
-      cycleLength: Number(cycleLength),
-      glideCapable: (vocab.glide_capable_roles || []).includes(role)
-    });
-    if (!out.pattern) {
-      setError("No drum strokes detected - check the recording level or trim leading silence.");
-    } else {
-      setResult(out);
-    }
-    setBusy(false);
   }
 
   if (!audioSupported()) {
@@ -68,24 +72,24 @@ export default function TranscribeView({ vocab, onOpenInEncoder }) {
         </p>
         <div className="transcribe-form">
           <label>recording
-            <input type="file" accept="audio/*"
+            <input type="file" accept="audio/*" disabled={busy}
               onChange={e => { setFile(e.target.files?.[0] || null); setResult(null); setError(""); }} />
           </label>
           <label>drum
-            <select value={role} onChange={e => setRole(e.target.value)}>
+            <select value={role} disabled={busy} onChange={e => setRole(e.target.value)}>
               {vocab.instrument_roles?.map(o => <option key={o}>{o}</option>)}
             </select>
           </label>
           <label>tempo (bpm)
-            <input type="number" min="1" value={bpm} onChange={e => setBpm(e.target.value)} />
+            <input type="number" min="1" value={bpm} disabled={busy} onChange={e => setBpm(e.target.value)} />
           </label>
           <label>pulse
-            <select value={pulseUnit} onChange={e => setPulseUnit(e.target.value)}>
+            <select value={pulseUnit} disabled={busy} onChange={e => setPulseUnit(e.target.value)}>
               {vocab.pulse_units?.map(o => <option key={o}>{o}</option>)}
             </select>
           </label>
           <label>cycle length
-            <input type="number" min="1" value={cycleLength} onChange={e => setCycleLength(e.target.value)} />
+            <input type="number" min="1" value={cycleLength} disabled={busy} onChange={e => setCycleLength(e.target.value)} />
           </label>
           <button disabled={!ready} onClick={run}>{busy ? "Analyzing..." : "Transcribe"}</button>
         </div>
