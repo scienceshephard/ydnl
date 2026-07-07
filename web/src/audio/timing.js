@@ -38,6 +38,9 @@ export function sampleCandidates(role, strokeType, register) {
 export function layerPosition(layer, tempoBpm, elapsedSeconds, loop) {
   const spp = secondsPerPulse(tempoBpm, layer.pulse_unit);
   const cycleSeconds = layer.metric_cycle_length * spp;
+  // A zero/negative cycle length or tempo has no valid clock; report the
+  // idle position rather than dividing by zero (NaN) or looping forever.
+  if (!(spp > 0) || !(cycleSeconds > 0)) return { pulseIndex: 0, fraction: 0, done: false };
   const local = elapsedSeconds - (layer.offset_pulses || 0) * spp;
   if (local < 0) return { pulseIndex: 0, fraction: 0, done: false };
   if (!loop && local >= cycleSeconds) {
@@ -54,6 +57,10 @@ export function strokeTimesInWindow(layer, tempoBpm, fromSeconds, toSeconds, loo
   const spp = secondsPerPulse(tempoBpm, layer.pulse_unit);
   const cycleSeconds = layer.metric_cycle_length * spp;
   const out = [];
+  // A non-positive tempo or cycle length has no valid clock: `!(x > 0)` also
+  // catches NaN, so this guards both bad inputs and avoids the `t += 0`
+  // infinite loop below when cycleSeconds is 0.
+  if (!(spp > 0) || !(cycleSeconds > 0)) return out;
   for (const ev of layer.stroke_events || []) {
     const base = ((layer.offset_pulses || 0) + ev.pulse_position - 1) * spp;
     if (!loop) {

@@ -80,6 +80,24 @@ test("strokeTimesInWindow repeats at the layer's own cycle in loop mode", () => 
   assert.deepEqual(next.map(h => h.when), [1.5, 2.0]);
 });
 
+test("strokeTimesInWindow returns no hits (does not hang) for a zero-length cycle", () => {
+  // Finding 1: metric_cycle_length 0 (or negative tempo) used to make the
+  // loop-mode `for (... t += cycleSeconds)` an infinite loop (t += 0),
+  // freezing the tab. This test must complete instead of hanging.
+  const hits = strokeTimesInWindow(layer({ metric_cycle_length: 0 }), 120, 0, 10, true);
+  assert.deepEqual(hits, []);
+});
+
+test("strokeTimesInWindow returns no hits for a non-positive tempo", () => {
+  const hits = strokeTimesInWindow(layer(), -10, 0, 10, true);
+  assert.deepEqual(hits, []);
+});
+
+test("layerPosition does not produce NaN for a zero-length cycle", () => {
+  const pos = layerPosition(layer({ metric_cycle_length: 0 }), 120, 1, true);
+  assert.deepEqual(pos, { pulseIndex: 0, fraction: 0, done: false });
+});
+
 test("patternDuration is the longest layer's single cycle", () => {
   const pattern = { tempo_bpm: 120, rhythmic_layers: [
     layer(),                                   // 1.5s
