@@ -8,18 +8,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createEngine } from "./engine.js";
 import { createSampleBank } from "./sampleBank.js";
-
-const AudioCtx = typeof window !== "undefined" ? (window.AudioContext || window.webkitAudioContext) : null;
-
-// One AudioContext for the whole session (browsers cap how many can run at
-// once), lazily created on the first Play click since autoplay policy
-// requires a user gesture. Never closed - it outlives any single hook
-// instance/mount.
-let sharedCtx = null;
-function getAudioContext() {
-  if (!sharedCtx) sharedCtx = new AudioCtx();
-  return sharedCtx;
-}
+import { getAudioContext, audioSupported } from "./context.js";
 
 export default function usePlayback() {
   const [playing, setPlaying] = useState(false);
@@ -82,5 +71,5 @@ export default function usePlayback() {
     };
   }, []);
 
-  return { supported: Boolean(AudioCtx), playing, loop, setLoop, toggle, positions };
+  return { supported: audioSupported(), playing, loop, setLoop, toggle, positions };
 }
