@@ -37,7 +37,7 @@
       "required": ["instrument_role", "pulse_unit", "metric_cycle_length", "stroke_events"],
       "properties": {
         "layer_id": { "type": "string" },
-        "instrument_role": { "type": "string" },
+        "instrument_role": { "type": "string", "enum": ["iya-ilu", "omele-abo", "omele-ako", "kudi", "iya-ilu-dundun", "gangan", "kerikeri", "gudugudu"] },
         "pulse_unit": { "type": "string", "enum": ["crotchet", "quaver", "semiquaver", "demisemiquaver"] },
         "metric_cycle_length": { "type": "integer", "minimum": 1 },
         "offset_pulses": { "type": "integer", "minimum": 0 },
@@ -45,7 +45,28 @@
           "type": "array",
           "items": { "$ref": "#/definitions/strokeEvent" }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$comment": "Organological constraint: only the Dundun hourglass tension drums can bend pitch. Bata drums are fixed-pitch (tuned with ida wax) and the gudugudu is a fixed-pitch kettle drum, so their stroke events may not carry a glide.",
+          "if": {
+            "properties": { "instrument_role": { "enum": ["iya-ilu-dundun", "gangan", "kerikeri"] } },
+            "required": ["instrument_role"]
+          },
+          "else": {
+            "properties": {
+              "stroke_events": {
+                "items": {
+                  "properties": {
+                    "pitch_register": { "enum": ["low", "mid", "high"] },
+                    "pitch_glide": { "type": "null" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "strokeEvent": {
       "type": "object",

@@ -3,7 +3,8 @@ import express from "express";
 import cors from "cors";
 import {
   STROKE_TYPES, PITCH_REGISTERS, GLIDE_DIRECTIONS, PULSE_UNITS,
-  ORISHA, CEREMONY_TYPES, REGIONAL_VARIANTS, INSTRUMENT_ROLES, VALIDATION_STATUS
+  ORISHA, CEREMONY_TYPES, REGIONAL_VARIANTS, INSTRUMENT_ROLES,
+  GLIDE_CAPABLE_ROLES, VALIDATION_STATUS
 } from "ydnl-core";
 import patterns from "./routes/patterns.js";
 import files from "./routes/files.js";
@@ -25,6 +26,7 @@ app.get("/api/vocabulary", (_req, res) => res.json({
   ceremony_types: CEREMONY_TYPES,
   regional_variants: REGIONAL_VARIANTS,
   instrument_roles: INSTRUMENT_ROLES,
+  glide_capable_roles: GLIDE_CAPABLE_ROLES,
   validation_status: VALIDATION_STATUS
 }));
 

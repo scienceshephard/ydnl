@@ -59,6 +59,16 @@
   </xs:element>
 
   <xs:element name="layer">
+    <xs:annotation>
+      <xs:documentation>
+        Organological constraint (not expressible in XSD 1.0, enforced by the
+        reference validator and the JSON Schema): a strokeEvent may carry a
+        pitchGlide or a "glide" pitch_register only when instrument_role is one
+        of the Dundun hourglass tension drums (iya-ilu-dundun, gangan,
+        kerikeri). Bata drums are fixed-pitch (tuned with ida wax) and the
+        gudugudu is a fixed-pitch kettle drum, so they may not glide.
+      </xs:documentation>
+    </xs:annotation>
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="ydnl:strokeEvent" maxOccurs="unbounded"/>

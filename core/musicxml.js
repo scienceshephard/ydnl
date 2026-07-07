@@ -1,8 +1,10 @@
 // musicxml.js
-// Benchmark encoder. It produces a deliberately degraded MusicXML rendering of
-// a YDNL pattern and reports exactly which structural features were lost in the
-// translation. This is the data source for the Benchmark Parity Ratio and it
-// makes the encoding gap concrete for non technical users.
+// Benchmark encoder. It produces the most faithful MusicXML rendering the
+// standard allows and reports exactly which structural features were still
+// lost in the translation. Being fair matters: onset timing, durations, and
+// note values ARE representable in MusicXML, so they are preserved here. The
+// losses reported by the Benchmark Parity Ratio are only the ones the format
+// genuinely cannot express.
 
 import { computeBPR } from "./metrics.js";
 
@@ -16,6 +18,46 @@ const REGISTER_PITCH = {
   glide: { step: "G", octave: 3 } // collapsed: the glide cannot be expressed
 };
 
+// One pulse of each YDNL pulse unit expressed as a MusicXML note type, plus
+// the beat-type denominator for the time signature.
+const PULSE_NOTE = {
+  crotchet: { types: ["quarter", "half", "whole"], beatType: 4 },
+  quaver: { types: ["eighth", "quarter", "half", "whole"], beatType: 8 },
+  semiquaver: { types: ["16th", "eighth", "quarter", "half", "whole"], beatType: 16 },
+  demisemiquaver: { types: ["32nd", "16th", "eighth", "quarter", "half", "whole"], beatType: 32 }
+};
+
+function noteType(pulseUnit, duration) {
+  const chain = (PULSE_NOTE[pulseUnit] || PULSE_NOTE.semiquaver).types;
+  // Powers of two climb the chain (2 semiquavers = one quaver, etc.);
+  // irregular durations keep the base type and rely on <duration>.
+  const step = Math.floor(Math.log2(duration));
+  return chain[Math.min(Math.max(step, 0), chain.length - 1)];
+}
+
+function noteXML(ev, pulseUnit, duration) {
+  const p = REGISTER_PITCH[ev.pitch_register] || REGISTER_PITCH.mid;
+  return [
+    "      <note>",
+    "        <pitch>",
+    `          <step>${p.step}</step>`,
+    `          <octave>${p.octave}</octave>`,
+    "        </pitch>",
+    `        <duration>${duration}</duration>`,
+    `        <type>${noteType(pulseUnit, duration)}</type>`,
+    "      </note>"
+  ].join("\n");
+}
+
+function restXML(duration) {
+  return [
+    "      <note>",
+    "        <rest/>",
+    `        <duration>${duration}</duration>`,
+    "      </note>"
+  ].join("\n");
+}
+
 export function toMusicXML(pattern) {
   const layers = pattern.rhythmic_layers || [];
 
@@ -23,31 +65,37 @@ export function toMusicXML(pattern) {
     `    <score-part id="P${i + 1}"><part-name>${l.instrument_role}</part-name></score-part>`
   ).join("\n");
 
-  // MusicXML forces a single shared time signature. We pick the first layer's
-  // cycle length, which already discards the polymetric independence.
-  const sharedBeats = layers[0]?.metric_cycle_length || 4;
+  // MusicXML forces a single shared time signature across the score. We take
+  // the longest cycle so no strokes are dropped, but the independent metric
+  // cycles are still collapsed: shorter layers are padded with rests instead
+  // of recurring at their own period. This is the polymeter loss made visible.
+  const sharedBeats = Math.max(4, ...layers.map(l => l.metric_cycle_length || 0));
+  const beatType = (PULSE_NOTE[layers[0]?.pulse_unit] || PULSE_NOTE.semiquaver).beatType;
 
   const parts = layers.map((l, i) => {
-    const notes = (l.stroke_events || []).slice().sort((a, b) => a.pulse_position - b.pulse_position).map(ev => {
-      const p = REGISTER_PITCH[ev.pitch_register] || REGISTER_PITCH.mid;
-      return [
-        "      <note>",
-        "        <pitch>",
-        `          <step>${p.step}</step>`,
-        `          <octave>${p.octave}</octave>`,
-        "        </pitch>",
-        "        <duration>1</duration>",
-        "        <type>16th</type>",
-        "      </note>"
-      ].join("\n");
-    }).join("\n");
+    const events = (l.stroke_events || []).slice().sort((a, b) => a.pulse_position - b.pulse_position);
+    const items = [];
+    let cursor = 1; // pulse positions are 1-based
+    for (let k = 0; k < events.length; k++) {
+      const ev = events[k];
+      if (ev.pulse_position < cursor) continue; // overlapping strokes cannot share a voice
+      if (ev.pulse_position > cursor) {
+        items.push(restXML(ev.pulse_position - cursor));
+        cursor = ev.pulse_position;
+      }
+      const nextOnset = events[k + 1] ? events[k + 1].pulse_position : sharedBeats + 1;
+      const duration = Math.max(1, Math.min(ev.duration_pulses || 1, nextOnset - cursor, sharedBeats + 1 - cursor));
+      items.push(noteXML(ev, l.pulse_unit, duration));
+      cursor += duration;
+    }
+    if (cursor <= sharedBeats) items.push(restXML(sharedBeats + 1 - cursor));
     return [
       `  <part id="P${i + 1}">`,
       `    <measure number="1">`,
       `      <attributes><divisions>1</divisions>`,
-      `        <time><beats>${sharedBeats}</beats><beat-type>16</beat-type></time>`,
+      `        <time><beats>${sharedBeats}</beats><beat-type>${beatType}</beat-type></time>`,
       `      </attributes>`,
-      notes,
+      items.join("\n"),
       `    </measure>`,
       `  </part>`
     ].join("\n");

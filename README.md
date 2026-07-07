@@ -77,6 +77,10 @@ A `DrumPattern` is the root aggregate and the unit of exchange. It owns one or m
 
 The prototype defaults to a JSON file store at `server/data/corpus.json` so it runs with no database setup. `server/db/schema.sql` is the production schema and mirrors the entity model one to one. To switch, create the schema in a Postgres database and replace the read and write functions in `server/store.js` with a `pg` client; nothing else changes.
 
+## About the corpus
+
+The twelve patterns in `server/data/corpus.json` (six Dùndún, six Bàtá) are illustrative synthetic examples that exercise every feature of the schema. They are not transcriptions of recordings and are not the product of fieldwork: no audio exists, no drummer is attributed, and every pattern is marked `draft`. The field collected corpus is future work. See `DATA.md` for the full provenance statement and for what the computed metrics do and do not show.
+
 ## License
 
-Released under the Creative Commons Attribution 4.0 International License (CC BY 4.0). The corpus, schema, and prototype are intended as open, shared preservation infrastructure.
+Released under the Creative Commons Attribution 4.0 International License (CC BY 4.0). The schema and prototype are intended as open, shared preservation infrastructure.

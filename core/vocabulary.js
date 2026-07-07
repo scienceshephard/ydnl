@@ -30,6 +30,13 @@ export const INSTRUMENT_ROLES = [
   "iya-ilu-dundun", "gangan", "kerikeri", "gudugudu" // Dundun
 ];
 
+// Roles that can carry a continuous pitch glide. Only the hourglass tension
+// drums of the Dundun family bend pitch (the player squeezes the lacing cords).
+// Bata drums are fixed-pitch (tuned with ida wax paste) and render speech
+// through stroke timbre, and the gudugudu is a fixed-pitch kettle drum, so
+// none of them may glide.
+export const GLIDE_CAPABLE_ROLES = ["iya-ilu-dundun", "gangan", "kerikeri"];
+
 export const VALIDATION_STATUS = ["draft", "faculty-reviewed", "master-validated"];
 
 export function isMember(list, value) {

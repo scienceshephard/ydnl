@@ -1,6 +1,6 @@
 {
   "pattern_id": "DP-0012",
-  "title": "Bata Sango invocation",
+  "title": "Bata Sango invocation (illustrative)",
   "tempo_bpm": 132,
   "metric_ratio": "12:8",
   "ensemble_ref": "ENS-Bata-3",
@@ -8,9 +8,9 @@
     "orisha_id": "Sango",
     "ceremony_type": "festival",
     "regional_variant": "Oyo",
-    "source_drummer_id": "Alhaji Adewale Ayinla",
-    "validation_status": "master-validated",
-    "recording_uri": "corpus/DP-0012.wav"
+    "source_drummer_id": "",
+    "validation_status": "draft",
+    "recording_uri": ""
   },
   "rhythmic_layers": [
     {
@@ -50,16 +50,11 @@
         {
           "event_id": "EV-4",
           "pulse_position": 9,
-          "stroke_type": "open",
-          "pitch_register": "glide",
+          "stroke_type": "combined",
+          "pitch_register": "high",
           "duration_pulses": 2,
           "dynamics": "mf",
-          "pitch_glide": {
-            "start_register": "mid",
-            "end_register": "high",
-            "glide_direction": "ascending",
-            "duration_pulses": 2
-          }
+          "pitch_glide": null
         }
       ]
     },

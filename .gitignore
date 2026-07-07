@@ -1,0 +1,7 @@
+node_modules
+.claude
+docs/superpowers/
+docs
+.superpowers
+web/dist
+web/node_modules

@@ -59,7 +59,12 @@ export function computeECS(pattern, capable = YDNL_CAPABLE) {
 }
 
 // BPR over MusicXML: YDNL unique features divided by features shared with the
-// competing standard.
+// competing standard. Convention: when a pattern shares no features with
+// MusicXML the ratio is undefined (division by zero), so we clamp the
+// denominator to 1 and BPR equals the unique-feature count. This UNDERSTATES
+// the disparity for such patterns; every pattern in the shipped corpus shares
+// exactly two features (multi_layer, register_tones), so the clamp never
+// fires over the reported results.
 export function computeBPR(pattern) {
   const present = detectFeatures(pattern);
   const shared = intersect(present, MUSICXML_CAPABLE);

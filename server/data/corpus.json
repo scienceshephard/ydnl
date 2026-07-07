@@ -1,7 +1,7 @@
 [
   {
     "pattern_id": "DP-0012",
-    "title": "Bata Sango invocation",
+    "title": "Bata Sango invocation (illustrative)",
     "tempo_bpm": 132,
     "metric_ratio": "12:8",
     "ensemble_ref": "ENS-Bata-3",
@@ -9,204 +9,1200 @@
       "orisha_id": "Sango",
       "ceremony_type": "festival",
       "regional_variant": "Oyo",
-      "source_drummer_id": "Alhaji Adewale Ayinla",
-      "validation_status": "master-validated",
-      "recording_uri": "corpus/DP-0012.wav"
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
     },
     "rhythmic_layers": [
       {
-        "layer_id": "LY-0012-1",
+        "layer_id": "LY-mqh044t5-1",
         "instrument_role": "iya-ilu",
         "pulse_unit": "semiquaver",
         "metric_cycle_length": 12,
         "offset_pulses": 0,
         "stroke_events": [
-          { "event_id": "EV-1", "pulse_position": 1, "stroke_type": "open", "pitch_register": "high", "duration_pulses": 1, "dynamics": "f", "pitch_glide": null },
-          { "event_id": "EV-2", "pulse_position": 3, "stroke_type": "muted", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
-          { "event_id": "EV-3", "pulse_position": 5, "stroke_type": "slap", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
-          { "event_id": "EV-4", "pulse_position": 9, "stroke_type": "open", "pitch_register": "glide", "duration_pulses": 2, "dynamics": "mf", "pitch_glide": { "start_register": "mid", "end_register": "high", "glide_direction": "ascending", "duration_pulses": 2 } }
+          {
+            "event_id": "EV-mqh044t5-2",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-3",
+            "pulse_position": 3,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-4",
+            "pulse_position": 5,
+            "stroke_type": "slap",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-5",
+            "pulse_position": 9,
+            "stroke_type": "combined",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-6",
+            "pulse_position": 11,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
         ]
       },
       {
-        "layer_id": "LY-0012-2",
+        "layer_id": "LY-mqh044t5-7",
         "instrument_role": "omele-abo",
         "pulse_unit": "semiquaver",
         "metric_cycle_length": 8,
         "offset_pulses": 0,
         "stroke_events": [
-          { "event_id": "EV-5", "pulse_position": 1, "stroke_type": "open", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
-          { "event_id": "EV-6", "pulse_position": 5, "stroke_type": "open", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null }
-        ]
-      }
-    ]
-  },
-  {
-    "pattern_id": "DP-0021",
-    "title": "Dundun Ogun praise line",
-    "tempo_bpm": 120,
-    "metric_ratio": "16:4",
-    "ensemble_ref": "ENS-Dundun-2",
-    "cultural_annotation": {
-      "orisha_id": "Ogun",
-      "ceremony_type": "palace",
-      "regional_variant": "Ondo",
-      "source_drummer_id": "Baba Tunde Ayanlola",
-      "validation_status": "faculty-reviewed",
-      "recording_uri": "corpus/DP-0021.wav"
-    },
-    "rhythmic_layers": [
-      {
-        "layer_id": "LY-0021-1",
-        "instrument_role": "iya-ilu-dundun",
-        "pulse_unit": "semiquaver",
-        "metric_cycle_length": 16,
-        "offset_pulses": 0,
-        "stroke_events": [
-          { "event_id": "EV-7", "pulse_position": 1, "stroke_type": "open", "pitch_register": "glide", "duration_pulses": 3, "dynamics": "f", "pitch_glide": { "start_register": "low", "end_register": "high", "glide_direction": "ascending", "duration_pulses": 3 } },
-          { "event_id": "EV-8", "pulse_position": 6, "stroke_type": "open", "pitch_register": "glide", "duration_pulses": 2, "dynamics": "mf", "pitch_glide": { "start_register": "high", "end_register": "mid", "glide_direction": "descending", "duration_pulses": 2 } },
-          { "event_id": "EV-9", "pulse_position": 11, "stroke_type": "muted", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null }
-        ]
-      },
-      {
-        "layer_id": "LY-0021-2",
-        "instrument_role": "gudugudu",
-        "pulse_unit": "quaver",
-        "metric_cycle_length": 4,
-        "offset_pulses": 0,
-        "stroke_events": [
-          { "event_id": "EV-10", "pulse_position": 1, "stroke_type": "open", "pitch_register": "high", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
-          { "event_id": "EV-11", "pulse_position": 3, "stroke_type": "muted", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null }
+          {
+            "event_id": "EV-mqh044t5-8",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-9",
+            "pulse_position": 5,
+            "stroke_type": "slap",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
         ]
       }
     ]
   },
   {
     "pattern_id": "DP-0034",
-    "title": "Bata Egungun procession",
-    "tempo_bpm": 144,
+    "title": "Bata Egungun procession (illustrative)",
+    "tempo_bpm": 116,
     "metric_ratio": "12:6:8",
-    "ensemble_ref": "ENS-Bata-4",
+    "ensemble_ref": "ENS-Bata-3",
     "cultural_annotation": {
       "orisha_id": "Egungun",
       "ceremony_type": "funeral",
       "regional_variant": "Oyo",
-      "source_drummer_id": "Alhaji Rasheed Ayanwale",
-      "validation_status": "master-validated",
-      "recording_uri": "corpus/DP-0034.wav"
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
     },
     "rhythmic_layers": [
       {
-        "layer_id": "LY-0034-1",
+        "layer_id": "LY-mqh044t5-10",
         "instrument_role": "iya-ilu",
         "pulse_unit": "semiquaver",
         "metric_cycle_length": 12,
         "offset_pulses": 0,
         "stroke_events": [
-          { "event_id": "EV-12", "pulse_position": 1, "stroke_type": "slap", "pitch_register": "high", "duration_pulses": 1, "dynamics": "f", "pitch_glide": null },
-          { "event_id": "EV-13", "pulse_position": 4, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
-          { "event_id": "EV-14", "pulse_position": 7, "stroke_type": "muted", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null },
-          { "event_id": "EV-15", "pulse_position": 10, "stroke_type": "combined", "pitch_register": "high", "duration_pulses": 1, "dynamics": "f", "pitch_glide": null }
+          {
+            "event_id": "EV-mqh044t5-11",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-12",
+            "pulse_position": 4,
+            "stroke_type": "slap",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-13",
+            "pulse_position": 7,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-14",
+            "pulse_position": 10,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
         ]
       },
       {
-        "layer_id": "LY-0034-2",
+        "layer_id": "LY-mqh044t5-15",
         "instrument_role": "omele-ako",
         "pulse_unit": "semiquaver",
         "metric_cycle_length": 6,
         "offset_pulses": 0,
         "stroke_events": [
-          { "event_id": "EV-16", "pulse_position": 1, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null },
-          { "event_id": "EV-17", "pulse_position": 4, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null }
+          {
+            "event_id": "EV-mqh044t5-16",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-17",
+            "pulse_position": 4,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
         ]
       },
       {
-        "layer_id": "LY-0034-3",
+        "layer_id": "LY-mqh044t5-18",
         "instrument_role": "kudi",
         "pulse_unit": "semiquaver",
         "metric_cycle_length": 8,
         "offset_pulses": 0,
         "stroke_events": [
-          { "event_id": "EV-18", "pulse_position": 1, "stroke_type": "rim", "pitch_register": "high", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null },
-          { "event_id": "EV-19", "pulse_position": 5, "stroke_type": "rim", "pitch_register": "high", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null }
-        ]
-      }
-    ]
-  },
-  {
-    "pattern_id": "DP-0045",
-    "title": "Dundun Osun river song",
-    "tempo_bpm": 108,
-    "metric_ratio": "12:4",
-    "ensemble_ref": "ENS-Dundun-2",
-    "cultural_annotation": {
-      "orisha_id": "Osun",
-      "ceremony_type": "festival",
-      "regional_variant": "Ijebu",
-      "source_drummer_id": "Iya Ayanfemi Olusola",
-      "validation_status": "faculty-reviewed",
-      "recording_uri": "corpus/DP-0045.wav"
-    },
-    "rhythmic_layers": [
-      {
-        "layer_id": "LY-0045-1",
-        "instrument_role": "iya-ilu-dundun",
-        "pulse_unit": "semiquaver",
-        "metric_cycle_length": 12,
-        "offset_pulses": 0,
-        "stroke_events": [
-          { "event_id": "EV-20", "pulse_position": 2, "stroke_type": "open", "pitch_register": "glide", "duration_pulses": 2, "dynamics": "mf", "pitch_glide": { "start_register": "mid", "end_register": "low", "glide_direction": "descending", "duration_pulses": 2 } },
-          { "event_id": "EV-21", "pulse_position": 7, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mf", "pitch_glide": null }
-        ]
-      },
-      {
-        "layer_id": "LY-0045-2",
-        "instrument_role": "kerikeri",
-        "pulse_unit": "quaver",
-        "metric_cycle_length": 4,
-        "offset_pulses": 1,
-        "stroke_events": [
-          { "event_id": "EV-22", "pulse_position": 1, "stroke_type": "open", "pitch_register": "high", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null },
-          { "event_id": "EV-23", "pulse_position": 3, "stroke_type": "muted", "pitch_register": "low", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null }
+          {
+            "event_id": "EV-mqh044t5-19",
+            "pulse_position": 1,
+            "stroke_type": "slap",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-20",
+            "pulse_position": 5,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
         ]
       }
     ]
   },
   {
     "pattern_id": "DP-0058",
-    "title": "Bata Obatala white cloth rite",
-    "tempo_bpm": 96,
-    "metric_ratio": "8:8",
-    "ensemble_ref": "ENS-Bata-3",
+    "title": "Bata Obatala white cloth rite (illustrative)",
+    "tempo_bpm": 92,
+    "metric_ratio": "8",
+    "ensemble_ref": "ENS-Bata-2",
     "cultural_annotation": {
       "orisha_id": "Obatala",
       "ceremony_type": "initiation",
-      "regional_variant": "Ekiti",
-      "source_drummer_id": "Baba Ayangbile Adeyemo",
-      "validation_status": "master-validated",
-      "recording_uri": "corpus/DP-0058.wav"
+      "regional_variant": "Ijebu",
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
     },
     "rhythmic_layers": [
       {
-        "layer_id": "LY-0058-1",
+        "layer_id": "LY-mqh044t5-21",
         "instrument_role": "iya-ilu",
         "pulse_unit": "semiquaver",
         "metric_cycle_length": 8,
         "offset_pulses": 0,
         "stroke_events": [
-          { "event_id": "EV-24", "pulse_position": 1, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null },
-          { "event_id": "EV-25", "pulse_position": 4, "stroke_type": "muted", "pitch_register": "low", "duration_pulses": 1, "dynamics": "p", "pitch_glide": null },
-          { "event_id": "EV-26", "pulse_position": 6, "stroke_type": "open", "pitch_register": "high", "duration_pulses": 1, "dynamics": "mp", "pitch_glide": null }
+          {
+            "event_id": "EV-mqh044t5-22",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-23",
+            "pulse_position": 3,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-24",
+            "pulse_position": 5,
+            "stroke_type": "slap",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-25",
+            "pulse_position": 7,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
         ]
       },
       {
-        "layer_id": "LY-0058-2",
+        "layer_id": "LY-mqh044t5-26",
         "instrument_role": "omele-abo",
         "pulse_unit": "semiquaver",
         "metric_cycle_length": 8,
-        "offset_pulses": 2,
+        "offset_pulses": 0,
         "stroke_events": [
-          { "event_id": "EV-27", "pulse_position": 2, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "p", "pitch_glide": null },
-          { "event_id": "EV-28", "pulse_position": 6, "stroke_type": "open", "pitch_register": "mid", "duration_pulses": 1, "dynamics": "p", "pitch_glide": null }
+          {
+            "event_id": "EV-mqh044t5-27",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-28",
+            "pulse_position": 5,
+            "stroke_type": "open",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0061",
+    "title": "Bata Oya storm salute (illustrative)",
+    "tempo_bpm": 144,
+    "metric_ratio": "12:8:6",
+    "ensemble_ref": "ENS-Bata-3",
+    "cultural_annotation": {
+      "orisha_id": "Oya",
+      "ceremony_type": "festival",
+      "regional_variant": "Oyo",
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-mqh044t5-29",
+        "instrument_role": "iya-ilu",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 12,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-30",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-31",
+            "pulse_position": 3,
+            "stroke_type": "slap",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-32",
+            "pulse_position": 6,
+            "stroke_type": "combined",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-33",
+            "pulse_position": 9,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      },
+      {
+        "layer_id": "LY-mqh044t5-34",
+        "instrument_role": "omele-abo",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 8,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-35",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-36",
+            "pulse_position": 4,
+            "stroke_type": "slap",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-37",
+            "pulse_position": 7,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      },
+      {
+        "layer_id": "LY-mqh044t5-38",
+        "instrument_role": "omele-ako",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 6,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-39",
+            "pulse_position": 1,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-40",
+            "pulse_position": 4,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0072",
+    "title": "Bata Eshu crossroads opening (illustrative)",
+    "tempo_bpm": 120,
+    "metric_ratio": "8",
+    "ensemble_ref": "ENS-Bata-2",
+    "cultural_annotation": {
+      "orisha_id": "Eshu",
+      "ceremony_type": "secular",
+      "regional_variant": "Ijebu",
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-mqh044t5-41",
+        "instrument_role": "iya-ilu",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 8,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-42",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-43",
+            "pulse_position": 3,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-44",
+            "pulse_position": 5,
+            "stroke_type": "slap",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-45",
+            "pulse_position": 7,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      },
+      {
+        "layer_id": "LY-mqh044t5-46",
+        "instrument_role": "kudi",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 8,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-47",
+            "pulse_position": 1,
+            "stroke_type": "slap",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-48",
+            "pulse_position": 4,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-49",
+            "pulse_position": 6,
+            "stroke_type": "slap",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0084",
+    "title": "Bata Yemoja procession (illustrative)",
+    "tempo_bpm": 108,
+    "metric_ratio": "12:8",
+    "ensemble_ref": "ENS-Bata-2",
+    "cultural_annotation": {
+      "orisha_id": "Yemoja",
+      "ceremony_type": "festival",
+      "regional_variant": "diaspora",
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-mqh044t5-50",
+        "instrument_role": "iya-ilu",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 12,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-51",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-52",
+            "pulse_position": 4,
+            "stroke_type": "combined",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-53",
+            "pulse_position": 8,
+            "stroke_type": "slap",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-54",
+            "pulse_position": 11,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      },
+      {
+        "layer_id": "LY-mqh044t5-55",
+        "instrument_role": "omele-abo",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 8,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-56",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-57",
+            "pulse_position": 5,
+            "stroke_type": "open",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0021",
+    "title": "Dundun Ogun praise line (illustrative)",
+    "tempo_bpm": 100,
+    "metric_ratio": "16:4",
+    "ensemble_ref": "ENS-Dundun-2",
+    "cultural_annotation": {
+      "orisha_id": "Ogun",
+      "ceremony_type": "festival",
+      "regional_variant": "Ondo",
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-mqh044t5-58",
+        "instrument_role": "iya-ilu-dundun",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 16,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-59",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "glide",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": {
+              "start_register": "low",
+              "end_register": "high",
+              "glide_direction": "ascending"
+            }
+          },
+          {
+            "event_id": "EV-mqh044t5-60",
+            "pulse_position": 5,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-61",
+            "pulse_position": 9,
+            "stroke_type": "open",
+            "pitch_register": "glide",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": {
+              "start_register": "high",
+              "end_register": "low",
+              "glide_direction": "descending"
+            }
+          },
+          {
+            "event_id": "EV-mqh044t5-62",
+            "pulse_position": 13,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      },
+      {
+        "layer_id": "LY-mqh044t5-63",
+        "instrument_role": "gudugudu",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 4,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-64",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-65",
+            "pulse_position": 3,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0045",
+    "title": "Dundun Osun river song (illustrative)",
+    "tempo_bpm": 96,
+    "metric_ratio": "12:4",
+    "ensemble_ref": "ENS-Dundun-2",
+    "cultural_annotation": {
+      "orisha_id": "Osun",
+      "ceremony_type": "festival",
+      "regional_variant": "Ekiti",
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-mqh044t5-66",
+        "instrument_role": "iya-ilu-dundun",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 12,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-67",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-68",
+            "pulse_position": 4,
+            "stroke_type": "open",
+            "pitch_register": "glide",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": {
+              "start_register": "mid",
+              "end_register": "high",
+              "glide_direction": "ascending"
+            }
+          },
+          {
+            "event_id": "EV-mqh044t5-69",
+            "pulse_position": 7,
+            "stroke_type": "muted",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-70",
+            "pulse_position": 10,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      },
+      {
+        "layer_id": "LY-mqh044t5-71",
+        "instrument_role": "kerikeri",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 4,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-72",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-73",
+            "pulse_position": 3,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0096",
+    "title": "Dundun Egungun ancestral call (illustrative)",
+    "tempo_bpm": 88,
+    "metric_ratio": "16:8:4",
+    "ensemble_ref": "ENS-Dundun-3",
+    "cultural_annotation": {
+      "orisha_id": "Egungun",
+      "ceremony_type": "funeral",
+      "regional_variant": "Oyo",
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-mqh044t5-74",
+        "instrument_role": "iya-ilu-dundun",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 16,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-75",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "glide",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": {
+              "start_register": "low",
+              "end_register": "high",
+              "glide_direction": "ascending"
+            }
+          },
+          {
+            "event_id": "EV-mqh044t5-76",
+            "pulse_position": 6,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-77",
+            "pulse_position": 11,
+            "stroke_type": "open",
+            "pitch_register": "glide",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": {
+              "start_register": "high",
+              "end_register": "mid",
+              "glide_direction": "descending"
+            }
+          }
+        ]
+      },
+      {
+        "layer_id": "LY-mqh044t5-78",
+        "instrument_role": "gangan",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 8,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-79",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-80",
+            "pulse_position": 4,
+            "stroke_type": "muted",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-81",
+            "pulse_position": 6,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      },
+      {
+        "layer_id": "LY-mqh044t5-82",
+        "instrument_role": "gudugudu",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 4,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-83",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-84",
+            "pulse_position": 3,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0103",
+    "title": "Dundun Orunmila divination line (illustrative)",
+    "tempo_bpm": 84,
+    "metric_ratio": "12:4",
+    "ensemble_ref": "ENS-Dundun-2",
+    "cultural_annotation": {
+      "orisha_id": "Orunmila",
+      "ceremony_type": "palace",
+      "regional_variant": "Oyo",
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-mqh044t5-85",
+        "instrument_role": "iya-ilu-dundun",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 12,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-86",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "glide",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": {
+              "start_register": "mid",
+              "end_register": "high",
+              "glide_direction": "ascending"
+            }
+          },
+          {
+            "event_id": "EV-mqh044t5-87",
+            "pulse_position": 5,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-88",
+            "pulse_position": 8,
+            "stroke_type": "open",
+            "pitch_register": "glide",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": {
+              "start_register": "high",
+              "end_register": "low",
+              "glide_direction": "descending"
+            }
+          },
+          {
+            "event_id": "EV-mqh044t5-89",
+            "pulse_position": 11,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      },
+      {
+        "layer_id": "LY-mqh044t5-90",
+        "instrument_role": "kerikeri",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 4,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-91",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-92",
+            "pulse_position": 3,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0117",
+    "title": "Dundun Sango oriki (illustrative)",
+    "tempo_bpm": 126,
+    "metric_ratio": "8:4",
+    "ensemble_ref": "ENS-Dundun-2",
+    "cultural_annotation": {
+      "orisha_id": "Sango",
+      "ceremony_type": "festival",
+      "regional_variant": "Oyo",
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-mqh044t5-93",
+        "instrument_role": "iya-ilu-dundun",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 8,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-94",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-95",
+            "pulse_position": 3,
+            "stroke_type": "open",
+            "pitch_register": "glide",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": {
+              "start_register": "mid",
+              "end_register": "high",
+              "glide_direction": "ascending"
+            }
+          },
+          {
+            "event_id": "EV-mqh044t5-96",
+            "pulse_position": 5,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-97",
+            "pulse_position": 7,
+            "stroke_type": "open",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      },
+      {
+        "layer_id": "LY-mqh044t5-98",
+        "instrument_role": "gudugudu",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 4,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t5-99",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t5-100",
+            "pulse_position": 3,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "pattern_id": "DP-0128",
+    "title": "Dundun naming ceremony greeting (illustrative)",
+    "tempo_bpm": 104,
+    "metric_ratio": "16",
+    "ensemble_ref": "ENS-Dundun-2",
+    "cultural_annotation": {
+      "orisha_id": "Obatala",
+      "ceremony_type": "naming",
+      "regional_variant": "Ondo",
+      "source_drummer_id": "",
+      "validation_status": "draft",
+      "recording_uri": ""
+    },
+    "rhythmic_layers": [
+      {
+        "layer_id": "LY-mqh044t6-101",
+        "instrument_role": "iya-ilu-dundun",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 16,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t6-102",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t6-103",
+            "pulse_position": 5,
+            "stroke_type": "muted",
+            "pitch_register": "low",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t6-104",
+            "pulse_position": 9,
+            "stroke_type": "open",
+            "pitch_register": "high",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t6-105",
+            "pulse_position": 13,
+            "stroke_type": "muted",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
+        ]
+      },
+      {
+        "layer_id": "LY-mqh044t6-106",
+        "instrument_role": "gangan",
+        "pulse_unit": "semiquaver",
+        "metric_cycle_length": 16,
+        "offset_pulses": 0,
+        "stroke_events": [
+          {
+            "event_id": "EV-mqh044t6-107",
+            "pulse_position": 1,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          },
+          {
+            "event_id": "EV-mqh044t6-108",
+            "pulse_position": 9,
+            "stroke_type": "open",
+            "pitch_register": "mid",
+            "duration_pulses": 1,
+            "dynamics": "mf",
+            "pitch_glide": null
+          }
         ]
       }
     ]

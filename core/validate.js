@@ -6,7 +6,8 @@
 
 import {
   STROKE_TYPES, PITCH_REGISTERS, GLIDE_DIRECTIONS, PULSE_UNITS,
-  ORISHA, CEREMONY_TYPES, REGIONAL_VARIANTS, INSTRUMENT_ROLES, isMember
+  ORISHA, CEREMONY_TYPES, REGIONAL_VARIANTS, INSTRUMENT_ROLES,
+  GLIDE_CAPABLE_ROLES, isMember
 } from "./vocabulary.js";
 
 export function validatePattern(pattern) {
@@ -60,6 +61,10 @@ export function validatePattern(pattern) {
         if (ev.pitch_glide) {
           const g = ev.pitch_glide;
           if (!isMember(GLIDE_DIRECTIONS, g.glide_direction)) e(`${ep}/pitch_glide/glide_direction`, `glide_direction '${g.glide_direction}' is not valid.`);
+        }
+        // Organological constraint: only Dundun tension drums can bend pitch.
+        if ((ev.pitch_glide || ev.pitch_register === "glide") && !isMember(GLIDE_CAPABLE_ROLES, layer.instrument_role)) {
+          e(`${ep}/pitch_glide`, `instrument_role '${layer.instrument_role}' is a fixed-pitch drum and cannot carry a pitch glide. Glide-capable roles: ${GLIDE_CAPABLE_ROLES.join(", ")}.`);
         }
       });
     });
