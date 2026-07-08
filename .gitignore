@@ -5,4 +5,5 @@ node_modules
 .superpowers/
 .superpowers
 web/dist
-web/node_modulesdocs/superpower specs/
+web/node_modulesdocs/superpowers specs/
+docs/superpowers/specs/
