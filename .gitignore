@@ -1,7 +1,8 @@
 node_modules
 .claude
-docs/superpowers/specs/
-docs/
+/docs/
+
+.superpowers/
 .superpowers
 web/dist
 web/node_modules
