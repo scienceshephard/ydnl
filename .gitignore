@@ -1,7 +1,7 @@
 node_modules
 .claude
 docs/superpowers/
-docs
+docs/
 .superpowers
 web/dist
 web/node_modules
