@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+<rect x="40" y="30" width="810" height="140" rx="12" fill="#edf3fb" stroke="#1f3a5f" stroke-width="3"/>
+<text x="62" y="60" font-family="Helvetica, Arial, sans-serif" font-size="17.5" fill="#1f3a5f" font-weight="bold" font-style="normal" text-anchor="start">Presentation Layer — React Single Page Application</text>
+<rect x="64.0" y="74" width="178.5" height="82" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2"/>
+<text x="153.25" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Timeline</text>
+<text x="153.25" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Encoder</text>
+<rect x="258.5" y="74" width="178.5" height="82" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2"/>
+<text x="347.75" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Pattern</text>
+<text x="347.75" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Renderer</text>
+<rect x="453.0" y="74" width="178.5" height="82" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2"/>
+<text x="542.25" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Searchable</text>
+<text x="542.25" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Library</text>
+<rect x="647.5" y="74" width="178.5" height="82" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2"/>
+<text x="736.75" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Benchmark</text>
+<text x="736.75" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">View</text>
+<line x1="445.0" y1="173" x2="445.0" y2="186" stroke="#1f3a5f" stroke-width="4"/><polygon points="445.0,197 437.3,186 452.7,186" fill="#1f3a5f"/>
+<text x="463.0" y="190" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#5a6a7a" font-weight="normal" font-style="italic" text-anchor="start">JSON over HTTPS</text>
+<rect x="40" y="200" width="810" height="150" rx="12" fill="#edf3fb" stroke="#1f3a5f" stroke-width="3"/>
+<text x="62" y="230" font-family="Helvetica, Arial, sans-serif" font-size="17.5" fill="#1f3a5f" font-weight="bold" font-style="normal" text-anchor="start">API Layer — Express REST Service (routes map to schema operations)</text>
+<rect x="64.0" y="244" width="139.6" height="92" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2"/>
+<text x="133.8" y="285.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">POST</text>
+<text x="133.8" y="305.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">/encode</text>
+<rect x="219.6" y="244" width="139.6" height="92" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2"/>
+<text x="289.4" y="285.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">POST</text>
+<text x="289.4" y="305.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">/validate</text>
+<rect x="375.2" y="244" width="139.6" height="92" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2"/>
+<text x="445.0" y="285.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">GET</text>
+<text x="445.0" y="305.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">/patterns/{id}</text>
+<rect x="530.8" y="244" width="139.6" height="92" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2"/>
+<text x="600.5999999999999" y="285.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">GET</text>
+<text x="600.5999999999999" y="305.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">/search</text>
+<rect x="686.4" y="244" width="139.6" height="92" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2"/>
+<text x="756.1999999999999" y="285.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">POST</text>
+<text x="756.1999999999999" y="305.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">/benchmark</text>
+<line x1="445.0" y1="353" x2="445.0" y2="366" stroke="#1f3a5f" stroke-width="4"/><polygon points="445.0,377 437.3,366 452.7,366" fill="#1f3a5f"/>
+<text x="463.0" y="370" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#5a6a7a" font-weight="normal" font-style="italic" text-anchor="start">in process calls</text>
+<rect x="40" y="380" width="810" height="150" rx="12" fill="#eaf3ea" stroke="#3a7d44" stroke-width="3"/>
+<text x="62" y="410" font-family="Helvetica, Arial, sans-serif" font-size="17.5" fill="#3a7d44" font-weight="bold" font-style="normal" text-anchor="start">Core Domain Library — ydnl-core (framework independent)</text>
+<rect x="64.0" y="424" width="139.6" height="92" rx="8" fill="#e2efe2" stroke="#3a7d44" stroke-width="2"/>
+<text x="133.8" y="465.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Data</text>
+<text x="133.8" y="485.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Model</text>
+<rect x="219.6" y="424" width="139.6" height="92" rx="8" fill="#e2efe2" stroke="#3a7d44" stroke-width="2"/>
+<text x="289.4" y="465.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Schema</text>
+<text x="289.4" y="485.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Validator</text>
+<rect x="375.2" y="424" width="139.6" height="92" rx="8" fill="#e2efe2" stroke="#3a7d44" stroke-width="2"/>
+<text x="445.0" y="465.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">XML / JSON</text>
+<text x="445.0" y="485.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Serialisers</text>
+<rect x="530.8" y="424" width="139.6" height="92" rx="8" fill="#e2efe2" stroke="#3a7d44" stroke-width="2"/>
+<text x="600.5999999999999" y="455.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">MusicXML</text>
+<text x="600.5999999999999" y="475.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Benchmark</text>
+<text x="600.5999999999999" y="495.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Encoder</text>
+<rect x="686.4" y="424" width="139.6" height="92" rx="8" fill="#e2efe2" stroke="#3a7d44" stroke-width="2"/>
+<text x="756.1999999999999" y="465.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">Metric Fns</text>
+<text x="756.1999999999999" y="485.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">ECS BPR RP</text>
+<line x1="445.0" y1="533" x2="445.0" y2="546" stroke="#1f3a5f" stroke-width="4"/><polygon points="445.0,557 437.3,546 452.7,546" fill="#1f3a5f"/>
+<text x="463.0" y="550" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#5a6a7a" font-weight="normal" font-style="italic" text-anchor="start">repository interface</text>
+<rect x="40" y="560" width="810" height="120" rx="12" fill="#edf3fb" stroke="#1f3a5f" stroke-width="3"/>
+<text x="62" y="590" font-family="Helvetica, Arial, sans-serif" font-size="17.5" fill="#1f3a5f" font-weight="bold" font-style="normal" text-anchor="start">Persistence Layer</text>
+<rect x="64.0" y="604" width="373.0" height="62" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2"/>
+<text x="250.5" y="630.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">JSON Pattern Corpus</text>
+<text x="250.5" y="650.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">(prototype store)</text>
+<rect x="453.0" y="604" width="373.0" height="62" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2"/>
+<text x="639.5" y="630.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">PostgreSQL relational schema</text>
+<text x="639.5" y="650.0" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="middle">(production — mirrors entity model)</text>
+<rect x="895" y="170" width="265" height="480" rx="14" fill="#1f3a5f" stroke="#1f3a5f" stroke-width="2.5"/>
+<text x="1027.5" y="214" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#ffffff" font-weight="bold" font-style="normal" text-anchor="middle" letter-spacing="1">VALIDATION</text>
+<text x="1027.5" y="242" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#ffffff" font-weight="bold" font-style="normal" text-anchor="middle" letter-spacing="1">CONTRACT</text>
+<line x1="925" y1="262" x2="1130" y2="262" stroke="#7d93b5" stroke-width="1.5"/>
+<text x="1027.5" y="296" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#e8eef7" font-weight="normal" font-style="normal" text-anchor="middle">XSD + JSON Schema</text>
+<text x="1027.5" y="334" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#e8eef7" font-weight="normal" font-style="normal" text-anchor="middle">Single source of truth</text>
+<text x="1027.5" y="358" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#e8eef7" font-weight="normal" font-style="normal" text-anchor="middle">for the file format,</text>
+<text x="1027.5" y="382" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#e8eef7" font-weight="normal" font-style="normal" text-anchor="middle">the relational schema,</text>
+<text x="1027.5" y="406" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#e8eef7" font-weight="normal" font-style="normal" text-anchor="middle">and runtime checks.</text>
+<text x="1027.5" y="444" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#e8eef7" font-weight="normal" font-style="normal" text-anchor="middle">Enforced at the API</text>
+<text x="1027.5" y="468" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#e8eef7" font-weight="normal" font-style="normal" text-anchor="middle">boundary and inside</text>
+<text x="1027.5" y="492" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#e8eef7" font-weight="normal" font-style="normal" text-anchor="middle">the core library.</text>
+<line x1="893" y1="275.0" x2="869" y2="275.0" stroke="#c0392b" stroke-width="3.5"/><polygon points="858,275.0 869,267.3 869,282.7" fill="#c0392b"/>
+<line x1="893" y1="455.0" x2="869" y2="455.0" stroke="#c0392b" stroke-width="3.5"/><polygon points="858,455.0 869,447.3 869,462.7" fill="#c0392b"/>
+<line x1="893" y1="620.0" x2="869" y2="620.0" stroke="#c0392b" stroke-width="3.5"/><polygon points="858,620.0 869,612.3 869,627.7" fill="#c0392b"/>
+</svg>

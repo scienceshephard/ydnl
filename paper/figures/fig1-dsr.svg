@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640">
+<rect x="40" y="115" width="252" height="372" rx="14" fill="#f6efdd" stroke="#9c7c2c" stroke-width="3"/>
+<text x="166" y="158" font-family="Helvetica, Arial, sans-serif" font-size="21" fill="#7a5f14" font-weight="bold" font-style="normal" text-anchor="middle" letter-spacing="1">ENVIRONMENT</text>
+<line x1="70" y1="172" x2="262" y2="172" stroke="#9c7c2c" stroke-width="1.5"/>
+<text x="66" y="210.0" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">Yorùbá Dùndún and</text>
+<text x="66" y="232.475" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">Bàtá performance practice</text>
+<text x="66" y="277.0" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">Master drummers of</text>
+<text x="66" y="299.475" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">Ondo and Oyo States</text>
+<text x="66" y="344.0" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">FUTA Department of</text>
+<text x="66" y="366.475" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">Music and Creative Arts</text>
+<text x="66" y="411.0" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">Cultural and ritual</text>
+<text x="66" y="433.475" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">context of each pattern</text>
+<rect x="908" y="115" width="252" height="372" rx="14" fill="#efeaf7" stroke="#7a5fa8" stroke-width="3"/>
+<text x="1034" y="158" font-family="Helvetica, Arial, sans-serif" font-size="21" fill="#5b4485" font-weight="bold" font-style="normal" text-anchor="middle" letter-spacing="1">KNOWLEDGE BASE</text>
+<line x1="938" y1="172" x2="1130" y2="172" stroke="#7a5fa8" stroke-width="1.5"/>
+<text x="934" y="210.0" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">Design Science Research</text>
+<text x="934" y="232.475" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">(Hevner et al.)</text>
+<text x="934" y="277.0" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">Yorùbá ethnomusicology</text>
+<text x="934" y="299.475" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">and speech surrogacy</text>
+<text x="934" y="344.0" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">Encoding standards:</text>
+<text x="934" y="366.475" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">MusicXML, MEI, Humdrum</text>
+<text x="934" y="411.0" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">Software engineering</text>
+<text x="934" y="433.475" font-family="Helvetica, Arial, sans-serif" font-size="15.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">and schema design</text>
+<rect x="368" y="38" width="464" height="503" rx="16" fill="#edf3fb" stroke="#1f3a5f" stroke-width="3.5"/>
+<text x="600" y="76" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#1f3a5f" font-weight="bold" font-style="normal" text-anchor="middle" letter-spacing="0.5">DESIGN SCIENCE — BUILD &amp; EVALUATE</text>
+<rect x="392" y="96" width="416" height="76" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2.5"/>
+<text x="410" y="121" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f3a5f" font-weight="bold" font-style="normal" text-anchor="start">Phase 0 — Corpus Construction</text>
+<text x="410" y="142" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">12 synthetic seed patterns (6 Dùndún, 6 Bàtá);</text>
+<text x="410" y="163" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">fieldwork toward a 24-pattern corpus in progress</text>
+<line x1="600" y1="170" x2="600" y2="177" stroke="#1f3a5f" stroke-width="4"/><polygon points="600,188 592.3,177 607.7,177" fill="#1f3a5f"/>
+<rect x="392" y="188" width="416" height="76" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2.5"/>
+<text x="410" y="213" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f3a5f" font-weight="bold" font-style="normal" text-anchor="start">Phase 1 — Domain Analysis</text>
+<text x="410" y="234" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">produces the Structural</text>
+<text x="410" y="255" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">Incompatibility Report</text>
+<line x1="600" y1="262" x2="600" y2="269" stroke="#1f3a5f" stroke-width="4"/><polygon points="600,280 592.3,269 607.7,269" fill="#1f3a5f"/>
+<rect x="392" y="280" width="416" height="76" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2.5"/>
+<text x="410" y="305" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f3a5f" font-weight="bold" font-style="normal" text-anchor="start">Phase 2 — Schema &amp; Format Design</text>
+<text x="410" y="326" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">data model, XSD / JSON Schema, cultural</text>
+<text x="410" y="347" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">vocabulary; metrics fixed in advance</text>
+<line x1="600" y1="354" x2="600" y2="361" stroke="#1f3a5f" stroke-width="4"/><polygon points="600,372 592.3,361 607.7,361" fill="#1f3a5f"/>
+<rect x="392" y="372" width="416" height="55" rx="8" fill="#dbe7f6" stroke="#2e6da4" stroke-width="2.5"/>
+<text x="410" y="397" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f3a5f" font-weight="bold" font-style="normal" text-anchor="start">Phase 3 — Prototype Build</text>
+<text x="410" y="418" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">React + Express + ydnl-core</text>
+<line x1="600" y1="425" x2="600" y2="432" stroke="#1f3a5f" stroke-width="4"/><polygon points="600,443 592.3,432 607.7,432" fill="#1f3a5f"/>
+<rect x="392" y="443" width="416" height="76" rx="8" fill="#e2efe2" stroke="#3a7d44" stroke-width="2.5"/>
+<text x="410" y="468" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#3a7d44" font-weight="bold" font-style="normal" text-anchor="start">Phase 4 — Evaluation &amp; Validation</text>
+<text x="410" y="489" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">ECS, BPR and RP computed on the corpus;</text>
+<text x="410" y="510" font-family="Helvetica, Arial, sans-serif" font-size="14.5" fill="#1c2b3a" font-weight="normal" font-style="normal" text-anchor="start">master-drummer validation planned</text>
+<line x1="600" y1="543" x2="600" y2="553" stroke="#1f3a5f" stroke-width="5"/><polygon points="600,567 590.2,553 609.8,553" fill="#1f3a5f"/>
+<rect x="428" y="569" width="344" height="56" rx="10" fill="#1f3a5f" stroke="#1f3a5f" stroke-width="2.5"/>
+<text x="600" y="593" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#ffffff" font-weight="bold" font-style="normal" text-anchor="middle">Drum Pattern Corpus</text>
+<text x="600" y="615" font-family="Helvetica, Arial, sans-serif" font-size="13.5" fill="#c9d6e8" font-weight="normal" font-style="normal" text-anchor="middle">shared artefact of record across all cycles</text>
+<line x1="294" y1="240" x2="352" y2="240" stroke="#1f3a5f" stroke-width="5"/><polygon points="366,240 352,230.2 352,249.8" fill="#1f3a5f"/>
+<line x1="366" y1="420" x2="308" y2="420" stroke="#1f3a5f" stroke-width="5"/><polygon points="294,420 308,410.2 308,429.8" fill="#1f3a5f"/>
+<text x="333" y="330" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#8a5a1a" font-weight="bold" text-anchor="middle" letter-spacing="1.5" transform="rotate(-90 333 330)">RELEVANCE CYCLE</text>
+<line x1="834" y1="240" x2="892" y2="240" stroke="#1f3a5f" stroke-width="5"/><polygon points="906,240 892,230.2 892,249.8" fill="#1f3a5f"/>
+<line x1="906" y1="420" x2="848" y2="420" stroke="#1f3a5f" stroke-width="5"/><polygon points="834,420 848,410.2 848,429.8" fill="#1f3a5f"/>
+<text x="868" y="330" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#8a2a3a" font-weight="bold" text-anchor="middle" letter-spacing="1.5" transform="rotate(-90 868 330)">RIGOR CYCLE</text>
+</svg>
